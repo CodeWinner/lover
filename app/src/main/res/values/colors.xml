@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    // Orange
+    <color name="Or50">#fff3e0</color>
+    <color name="Or500">#FF9800</color>
+
+    //Pink
+    <color name="Pi50">#fce4ec</color>
+    <color name="Pi300">#f06292</color>
+    <color name="Pi500">#e91e63</color>
+
+    // White
+    <color name="white">#FFFFFF</color>
+
+    // back group color trong suot
+    <color name="blackTS15">#4D000000</color>
+
+    <color name="xam">#757575</color>
+</resources>

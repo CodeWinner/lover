@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".main.MainInfoActivity"
+    android:id="@+id/contentMainInfoLayout"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_main_info">
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressMainConentInfo"
+        style="?android:attr/progressBarStyle"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/wave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/wave" />
+
+    <com.gelitenight.waveview.library.WaveView
+        android:id="@+id/wave"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_main"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.273">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
+        android:layout_width="92dp"
+        android:layout_height="11dp"
+        android:layout_alignParentTop="true"
+        app:ci_drawable="@drawable/hearth"
+        app:ci_drawable_unselected="@color/colorPrimary"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/mImageHeart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_pager_main"
+        app:layout_constraintVertical_bias="0.013" />
+
+    <LinearLayout
+        android:id="@+id/lImageLover1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/lImageLover2"
+        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_pager_main"
+        app:layout_constraintVertical_bias="0.229"
+        android:orientation="vertical">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/mImageLover1"
+            android:layout_width="117dp"
+            android:layout_height="111dp"
+            android:src="@drawable/logo"
+            app:civ_border_color="@color/Pi50"
+            app:civ_border_width="2dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/lover1Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_fragment_main"
+            android:fontFamily="@font/lobster"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/lover1"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            app:fontFamily="@font/lobster" />
+
+        <ImageView
+            android:id="@+id/imageSexLover1"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:background="@drawable/bg_fragment_main"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:src="@drawable/iconman"
+            android:layout_width="50dp"
+            android:layout_height="25dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lImageLover2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.918"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_pager_main"
+        app:layout_constraintVertical_bias="0.229"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/mImageLover2"
+            android:layout_width="117dp"
+            android:layout_height="111dp"
+            android:src="@drawable/lover2"
+            app:civ_border_color="@color/Pi50"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.918"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_pager_main"
+            app:layout_constraintVertical_bias="0.229"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/lover2Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_fragment_main"
+            android:fontFamily="@font/lobster"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:text="@string/lover2"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:fontFamily="@font/lobster" />
+
+        <ImageView
+            android:id="@+id/imageSexLover2"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:background="@drawable/bg_fragment_main"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:src="@drawable/iconwoman"
+            android:layout_width="50dp"
+            android:layout_height="25dp"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/mImageHeart"
+        android:layout_width="70dp"
+        android:layout_height="54dp"
+        android:src="@drawable/icon_hearth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/lImageLover2"
+        app:layout_constraintStart_toEndOf="@+id/lImageLover1"
+        app:layout_constraintTop_toBottomOf="@+id/view_pager_main" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

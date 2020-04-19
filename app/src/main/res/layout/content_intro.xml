@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Pi300"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".intro.IntroActivity"
+    tools:showIn="@layout/activity_intro">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="117dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="152dp"
+        android:src="@drawable/logo"
+        app:civ_border_color="@color/Pi50"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.227"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txtLogo"
+        android:layout_width="194dp"
+        android:layout_height="69dp"
+        android:layout_marginBottom="380dp"
+        android:text="@string/app_logo"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/Pi50"
+        android:textSize="45sp"
+        app:fontFamily="cursive"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtDecription"
+        android:layout_width="369dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="276dp"
+        android:text="@string/app_decript"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/Pi50"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        app:fontFamily="@font/sofia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLogo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:layout_width="199dp"
+        android:layout_height="22dp"
+        android:text="Design by B.I.N studio"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/Pi50"
+        android:textSize="10sp"
+        app:fontFamily="casual"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDecription"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
