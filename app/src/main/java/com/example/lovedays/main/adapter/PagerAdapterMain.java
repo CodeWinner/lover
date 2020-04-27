@@ -30,7 +30,7 @@ public class PagerAdapterMain extends FragmentPagerAdapter {
                 return FragmentMain.newInstance(0, "100");
             case 1:
                 Log.i("VIEW_PAGER","PAGE #1");
-                return FragmentCount.newInstance(1, "Chúng ta đã bên nhau...");
+                return FragmentCount.newInstance("");
             case 2:
                 Log.i("VIEW_PAGER","PAGE #2");
                 return FragmentStory.newInstance(2, "PAGE #2");

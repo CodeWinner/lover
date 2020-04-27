@@ -58,12 +58,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 APP_BACKGROUND, APP_LOVE_TEXT, APP_MUSIC,
                 APP_RATED, APP_NOTIFICATION, APP_LOGO_IMAGE);
 
+        String addFirstRecord = String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s , %s, %s) VALUES('20/04/2020', %s, %s, %s, %s, %s , %s, %s)",
+                TABLE_INFO_APP, APP_START_DAY, APP_THEME,
+                APP_BACKGROUND, APP_LOVE_TEXT, APP_MUSIC,
+                APP_RATED, APP_NOTIFICATION, APP_LOGO_IMAGE,
+                null, null, null, null, null, null, null);
+
         String createTIME_LINE = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
                 TABLE_TIME_LINE, TL_ID, TL_DATE,
                 TL_SUBJECT, TL_CONTENT, TL_STATUS);
 
         db.execSQL(createINFO_PERSONAL);
         db.execSQL(createINFO_APP);
+        db.execSQL(addFirstRecord);
         db.execSQL(createTIME_LINE);
     }
 

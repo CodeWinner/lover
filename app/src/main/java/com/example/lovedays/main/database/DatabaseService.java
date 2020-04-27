@@ -5,14 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.lovedays.R;
+import com.example.lovedays.main.units.InfoApp;
 import com.example.lovedays.main.units.InfoPersonal;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.lovedays.common.LoveCommon.APP_START_DAY;
 import static com.example.lovedays.common.LoveCommon.PERSONAL_BIRTH_DAY;
 import static com.example.lovedays.common.LoveCommon.PERSONAL_COLOR_BODER_CODE;
 import static com.example.lovedays.common.LoveCommon.PERSONAL_COLOR_TEXT;
@@ -20,19 +21,29 @@ import static com.example.lovedays.common.LoveCommon.PERSONAL_ID;
 import static com.example.lovedays.common.LoveCommon.PERSONAL_IMAGE;
 import static com.example.lovedays.common.LoveCommon.PERSONAL_NAME;
 import static com.example.lovedays.common.LoveCommon.PERSONAL_SEX;
+import static com.example.lovedays.common.LoveCommon.TABLE_INFO_APP;
 import static com.example.lovedays.common.LoveCommon.TABLE_INFO_PERSONAL_NAME;
 
 public class DatabaseService {
-    private DatabaseOnListener mListener;
+    private DatabaseLoverOnListener mListener;
+    private DatabaseInfoAppListener mInforAppListener;
     private DatabaseHelper dbHelper;
     private SQLiteDatabase database;
     private Context context;
 
-    public DatabaseService (Context context, DatabaseOnListener mListener) {
+    public DatabaseService (Context context, DatabaseLoverOnListener mListener) {
         this.context = context;
         this.mListener = mListener;
     }
 
+    public DatabaseService (Context context, DatabaseInfoAppListener mInforAppListener) {
+        this.context = context;
+        this.mInforAppListener = mInforAppListener;
+    }
+
+    public DatabaseService (Context context){
+        this.context = context;
+    }
     /**
      * Open SQL
      * @return
@@ -64,7 +75,7 @@ public class DatabaseService {
             database.insert(TABLE_INFO_PERSONAL_NAME, null, values);
             mListener.updPersonSuccess(infoPersonal.getId());
         } catch (SQLException e) {
-            mListener.updPersionError(context.getApplicationContext().getResources().getString(R.string.update_error));
+            mListener.updPersonError(context.getApplicationContext().getResources().getString(R.string.update_error));
         } finally {
             if (database != null) {
                 database.close();
@@ -91,7 +102,7 @@ public class DatabaseService {
                 database.update(TABLE_INFO_PERSONAL_NAME, values, PERSONAL_ID + " = ?", new String[]{infoPersonal.getId()} );
                 mListener.updPersonSuccess(infoPersonal.getId());
             } catch (SQLException e) {
-                mListener.updPersionError(context.getApplicationContext().getResources().getString(R.string.update_error));
+                mListener.updPersonError(context.getApplicationContext().getResources().getString(R.string.update_error));
             } finally {
                 if (database != null) {
                     database.close();
@@ -136,6 +147,10 @@ public class DatabaseService {
         return null;
     }
 
+    /**
+     * Get all person
+     * @return
+     */
     public List<InfoPersonal> getAllPersons() {
         try {
             List<InfoPersonal>  personalList = new ArrayList<>();
@@ -193,5 +208,60 @@ public class DatabaseService {
         }
 
         return false;
+    }
+
+    /******************************************************************************************/
+    // INFO_APP
+    /******************************************************************************************/
+
+    /**
+     * Update start day
+     * @param startDay
+     */
+    public void updateStartDay(String startDay) {
+        try {
+            database = dbHelper.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            values.put(APP_START_DAY, startDay);
+
+
+            database.update(TABLE_INFO_APP, values, null, null );
+            mInforAppListener.updPersonSuccess(startDay);
+        } catch (SQLException e) {
+            mInforAppListener.updPersionError(context.getApplicationContext().getResources().getString(R.string.update_error));
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+    }
+
+    /**
+     * Get start day
+     * @return
+     */
+    public String getStartDay() {
+        try {
+            database = dbHelper.getReadableDatabase();
+
+            Cursor cursor = database.query(TABLE_INFO_APP, new String[]{APP_START_DAY}, null, null,null, null, null);
+            if(cursor != null) {
+                cursor.moveToFirst();
+
+                if (cursor.getCount() != 0) {
+                    return cursor.getString(0);
+                }
+            }
+
+        } catch (SQLException e) {
+            mInforAppListener.getPersonError(context.getApplicationContext().getResources().getString(R.string.get_error));
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+
+        return null;
     }
 }

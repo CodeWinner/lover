@@ -5,8 +5,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="@drawable/bg_fragment_main"
     android:layout_height="match_parent">
-
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -43,11 +43,11 @@
             android:textSize="50sp" />
 
         <TextView
+            android:id="@+id/textViewStartDayMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/great_vibes"
-            android:text="Bạn đã yêu, 14 tuần 2 ngày 5 giờ 16 phút 23 giây"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="16sp" />
@@ -76,12 +76,12 @@
             scrolling_image_view:speed="1.9dp"
             scrolling_image_view:src="@drawable/scrolling_foreground" />
 
-
         <ImageView
-            android:layout_marginRight="100dp"
+            android:id="@+id/loverCar"
             android:layout_width="60dp"
             android:layout_height="50dp"
-            android:layout_gravity="center_horizontal|bottom"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="100dp"
             android:src="@drawable/lovecar" />
 
     </FrameLayout>

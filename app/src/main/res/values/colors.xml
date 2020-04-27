@@ -15,8 +15,21 @@
     // White
     <color name="white">#FFFFFF</color>
 
+    // White
+    <color name="white_4d">#4DFFFFFF</color>
+
     // back group color trong suot
     <color name="blackTS15">#4D000000</color>
 
     <color name="xam">#757575</color>
+    <color name="colorGrey50">#fafafa</color>
+    <color name="line">#1e88e5</color>
+
+    // teal
+    <color name="teal50">#e0f2f1</color>
+    <color name="teal400">#26a69a</color>
+
+    <color name="deep_purple_50">#ede7f6</color>
+    <color name="deep_purple_400">#7e57c2</color>
+
 </resources>

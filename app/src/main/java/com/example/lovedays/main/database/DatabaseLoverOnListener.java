@@ -2,9 +2,9 @@ package com.example.lovedays.main.database;
 
 import com.example.lovedays.main.units.InfoPersonal;
 
-public interface DatabaseOnListener {
+public interface DatabaseLoverOnListener {
     void updPersonSuccess(String id);
-    void updPersionError(String error);
+    void updPersonError(String error);
 
     void getPersonError(String error);
 }

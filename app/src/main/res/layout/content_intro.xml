@@ -9,27 +9,26 @@
     tools:context=".intro.IntroActivity"
     tools:showIn="@layout/activity_intro">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/profile_image"
-        android:layout_width="117dp"
+        android:layout_width="140dp"
         android:layout_height="111dp"
         android:layout_marginTop="152dp"
-        android:src="@drawable/logo"
-        app:civ_border_color="@color/Pi50"
-        app:civ_border_width="2dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logonew"
         app:layout_constraintBottom_toTopOf="@+id/txtLogo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.227"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/txtLogo"
         android:layout_width="194dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginBottom="364dp"
         android:text="@string/app_logo"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"

@@ -9,14 +9,17 @@
     android:id="@+id/contentMainInfoLayout"
     android:orientation="vertical"
     tools:showIn="@layout/activity_main_info">
-    <FrameLayout
+
+        <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="parent" >
+
+    </FrameLayout>
 
     <ProgressBar
         android:id="@+id/progressMainConentInfo"
@@ -75,14 +78,41 @@
         android:id="@+id/lImageLover1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/lImageLover2"
         app:layout_constraintHorizontal_bias="0.196"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_pager_main"
-        app:layout_constraintVertical_bias="0.229"
-        android:orientation="vertical">
+        app:layout_constraintVertical_bias="0.229">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_fragment_main"
+            android:padding="1.5dp">
+
+            <ImageView
+                android:id="@+id/imageCHDLover1"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/cungbocapicon" />
+
+            <TextView
+                android:id="@+id/mNameCHDLover1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/lobster"
+                android:paddingLeft="2dp"
+                android:text="Cự giải"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+        </LinearLayout>
         <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_gravity="center"
             android:id="@+id/mImageLover1"
             android:layout_width="117dp"
             android:layout_height="111dp"
@@ -100,26 +130,40 @@
             android:background="@drawable/bg_fragment_main"
             android:fontFamily="@font/lobster"
             android:paddingLeft="5dp"
+            android:paddingTop="3dp"
             android:paddingRight="5dp"
+            android:paddingBottom="3dp"
             android:text="@string/lover1"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
             app:fontFamily="@font/lobster" />
 
-        <ImageView
-            android:id="@+id/imageSexLover1"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
-            android:background="@drawable/bg_fragment_main"
-            android:layout_marginTop="5dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/iconman"
-            android:layout_width="50dp"
-            android:layout_height="25dp"/>
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_fragment_main"
+            android:padding="1.5dp">
 
+            <ImageView
+                android:id="@+id/imageSexLover1"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/iconman" />
+
+            <TextView
+                android:id="@+id/mOldLover1"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="2dp"
+                android:text="24"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:fontFamily="@font/lobster" />
+        </LinearLayout>
     </LinearLayout>
 
 
@@ -134,8 +178,33 @@
         app:layout_constraintTop_toBottomOf="@+id/view_pager_main"
         app:layout_constraintVertical_bias="0.229"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:background="@drawable/bg_fragment_main"
+            android:layout_marginTop="5dp"
+            android:padding="1.5dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageCHDLover2"
+                android:layout_gravity="center"
+                android:src="@drawable/cungbachduongicon"
+                android:layout_width="25dp"
+                android:layout_height="20dp"/>
 
+            <TextView
+                android:paddingLeft="2dp"
+                android:id="@+id/mNameCHDLover2"
+                android:text="Bảo bình"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:fontFamily="@font/lobster"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
         <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_gravity="center"
             android:id="@+id/mImageLover2"
             android:layout_width="117dp"
             android:layout_height="111dp"
@@ -158,8 +227,8 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/bg_fragment_main"
             android:fontFamily="@font/lobster"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:text="@string/lover2"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
@@ -168,23 +237,43 @@
             android:textSize="16sp"
             app:fontFamily="@font/lobster" />
 
-        <ImageView
-            android:id="@+id/imageSexLover2"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:background="@drawable/bg_fragment_main"
             android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            android:src="@drawable/iconwoman"
-            android:layout_width="50dp"
-            android:layout_height="25dp"/>
+            android:padding="1.5dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageSexLover2"
+                android:layout_gravity="center"
+                android:src="@drawable/iconwoman"
+                android:layout_width="25dp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:paddingLeft="2dp"
+                android:id="@+id/mOldLover2"
+                android:text="24"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:layout_width="25dp"
+                app:fontFamily="@font/lobster"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <ImageView
         android:id="@+id/mImageHeart"
-        android:layout_width="70dp"
-        android:layout_height="54dp"
-        android:src="@drawable/icon_hearth"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/iconhearth3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/lImageLover2"
         app:layout_constraintStart_toEndOf="@+id/lImageLover1"

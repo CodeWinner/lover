@@ -28,6 +28,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/mStartDay"
             android:fontFamily="@font/caveat_bold"
             android:text="#08/08/2016"
             android:textColor="@color/white"
@@ -51,11 +52,10 @@
 
         <TextView
             android:layout_marginTop="15dp"
-            android:id="@+id/txtTitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/caveat_bold"
-            android:text="2"
+            android:text="@string/title_fragment_count"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="27sp" />
@@ -69,11 +69,11 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="155dp"
-        android:layout_height="79dp"
+        android:id="@+id/imageViewCupid"
+        android:layout_width="169dp"
+        android:layout_height="110dp"
         android:layout_gravity="end"
-        android:src="@drawable/vutru"
+        android:src="@drawable/cupid_sleep"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
@@ -82,192 +82,443 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_weight="6"
+        android:layout_weight="4"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.744"
+        tools:layout_editor_absoluteX="11dp">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            app:cardBackgroundColor="@color/deep_purple_400"
+            app:cardCornerRadius="2dp"
+            app:contentPadding="2dp">
 
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="130dp"
-                android:background="@drawable/bongbay"
-                android:paddingTop="15dp"
-                android:text="20"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster"
-                android:text="Năm"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <LinearLayout
+                <TextView
+                    android:id="@+id/mYears"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:fontFamily="@font/caveat_bold"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/deep_purple_50"
+                    android:textSize="50sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_olip"
+                    android:fontFamily="@font/lobster"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="2dp"
+                    android:text="Năm"
+                    android:textAlignment="center"
+                    android:textColor="@color/blackTS15"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="130dp"
-                android:background="@drawable/bongbay"
-                android:paddingTop="15dp"
-                android:text="20"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-
-            <TextView
+            app:cardBackgroundColor="@color/deep_purple_400"
+            app:cardCornerRadius="2dp"
+            app:contentPadding="2dp">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster"
-                android:text="Tháng"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <LinearLayout
+                <TextView
+                    android:id="@+id/mMonths"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+
+                    android:fontFamily="@font/caveat_bold"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/deep_purple_50"
+                    android:textSize="50sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_olip"
+                    android:fontFamily="@font/lobster"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="2dp"
+                    android:text="Tháng"
+                    android:textAlignment="center"
+                    android:textColor="@color/blackTS15"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="130dp"
-                android:background="@drawable/bongbay"
-                android:paddingTop="15dp"
-                android:text="20"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-
-            <TextView
+            app:cardBackgroundColor="@color/deep_purple_400"
+            app:cardCornerRadius="2dp"
+            app:contentPadding="2dp">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster"
-                android:text="Tuần"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <LinearLayout
+                <TextView
+                    android:id="@+id/mWeeks"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+
+                    android:fontFamily="@font/caveat_bold"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/deep_purple_50"
+                    android:textSize="50sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_olip"
+                    android:fontFamily="@font/lobster"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="2dp"
+                    android:text="Tuần"
+                    android:textAlignment="center"
+                    android:textColor="@color/blackTS15"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="130dp"
-                android:background="@drawable/bongbay"
-                android:paddingTop="15dp"
-                android:text="20"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-
-            <TextView
+            app:cardBackgroundColor="@color/deep_purple_400"
+            app:cardCornerRadius="2dp"
+            app:contentPadding="2dp">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster"
-                android:text="Ngày"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                <TextView
+                    android:id="@+id/mDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
 
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="130dp"
-                android:background="@drawable/bongbay"
-                android:paddingTop="15dp"
-                android:text="20"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                    android:fontFamily="@font/caveat_bold"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/deep_purple_50"
+                    android:textSize="50sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster"
-                android:text="Giờ"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="130dp"
-                android:background="@drawable/bongbay"
-                android:paddingTop="15dp"
-                android:text="20"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster"
-                android:text="Phút"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="130dp"
-                android:background="@drawable/bongbay"
-                android:paddingTop="15dp"
-                android:text="20"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster"
-                android:text="Giây"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_olip"
+                    android:fontFamily="@font/lobster"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="2dp"
+                    android:text="Ngày"
+                    android:textAlignment="center"
+                    android:textColor="@color/blackTS15"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
+
+    <LinearLayout
+        android:paddingStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingRight="10dp"
+        android:gravity="end"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/mHours"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_circle"
+            android:fontFamily="@font/caveat_bold"
+            android:padding="2dp"
+            android:paddingRight="2dp"
+            android:text="00"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:text=":"
+            android:textAlignment="center"
+            android:textColor="@color/deep_purple_50"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mMinutes"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_circle"
+            android:fontFamily="@font/caveat_bold"
+            android:padding="2dp"
+            android:paddingRight="2dp"
+            android:text="00"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:text=":"
+            android:textAlignment="center"
+            android:textColor="@color/deep_purple_50"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mSeconds"
+            android:layout_width="30dp"
+            android:padding="2dp"
+            android:paddingRight="2dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_circle"
+            android:fontFamily="@font/caveat_bold"
+            android:text="00"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:padding="1dp">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/mYears"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:background="@drawable/heart222"-->
+        <!--                android:fontFamily="@font/caveat_bold"-->
+        <!--                android:paddingTop="15dp"-->
+        <!--                android:text="0"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="20sp" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:fontFamily="@font/lobster"-->
+        <!--                android:text="Năm"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="16sp" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:padding="1dp">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/mMonths"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:background="@drawable/heart222"-->
+        <!--                android:fontFamily="@font/caveat_bold"-->
+        <!--                android:paddingTop="15dp"-->
+        <!--                android:text="0"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="20sp" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:fontFamily="@font/lobster"-->
+        <!--                android:text="Tháng"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="16sp" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:padding="1dp">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/mWeeks"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:background="@drawable/heart222"-->
+        <!--                android:fontFamily="@font/caveat_bold"-->
+        <!--                android:paddingTop="15dp"-->
+        <!--                android:text="0"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="20sp" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:fontFamily="@font/lobster"-->
+        <!--                android:text="Tuần"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="16sp" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:padding="1dp">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/mDays"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:background="@drawable/heart222"-->
+        <!--                android:fontFamily="@font/caveat_bold"-->
+        <!--                android:paddingTop="15dp"-->
+        <!--                android:text="0"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="20sp" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:fontFamily="@font/lobster"-->
+        <!--                android:text="Ngày"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="16sp" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:padding="1dp">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/mHours"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:background="@drawable/heart222"-->
+        <!--                android:fontFamily="@font/caveat_bold"-->
+        <!--                android:paddingTop="15dp"-->
+        <!--                android:text="0"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="20sp" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:fontFamily="@font/lobster"-->
+        <!--                android:text="Giờ"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="16sp" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:padding="1dp">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/mMinutes"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:background="@drawable/heart222"-->
+        <!--                android:fontFamily="@font/caveat_bold"-->
+        <!--                android:paddingTop="15dp"-->
+        <!--                android:text="0"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="20sp" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:fontFamily="@font/lobster"-->
+        <!--                android:text="Phút"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="16sp" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:padding="1dp">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/mSeconds"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:background="@drawable/heart222"-->
+        <!--                android:fontFamily="@font/caveat_bold"-->
+        <!--                android:paddingTop="15dp"-->
+        <!--                android:text="0"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="20sp" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:fontFamily="@font/lobster"-->
+        <!--                android:text="Giây"-->
+        <!--                android:textAlignment="center"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="16sp" />-->
+        <!--        </LinearLayout>-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

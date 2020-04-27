@@ -2,8 +2,6 @@ package com.example.lovedays.main;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -16,11 +14,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,40 +26,57 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dd.processbutton.iml.ActionProcessButton;
 import com.example.lovedays.BuildConfig;
 import com.example.lovedays.R;
+import com.example.lovedays.common.DateUtils;
+import com.example.lovedays.common.exception.LoveDaysCountDayException;
 import com.example.lovedays.main.adapter.PagerAdapterMain;
 import com.example.lovedays.main.crop_image.BaseActivity;
-import com.example.lovedays.main.database.DatabaseOnListener;
+import com.example.lovedays.main.database.DatabaseLoverOnListener;
 import com.example.lovedays.main.database.DatabaseService;
+import com.example.lovedays.main.fragment.FragmentCount;
 import com.example.lovedays.main.helper.ProgressGenerator;
+import com.example.lovedays.common.SingleClickListener;
 import com.example.lovedays.main.helper.WaveHelper;
 import com.example.lovedays.main.units.InfoPersonal;
 import com.gelitenight.waveview.library.WaveView;
 import com.google.android.material.button.MaterialButton;
-import com.q42.android.scrollingimageview.ScrollingImageView;
 import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.UCropFragment;
 import com.yalantis.ucrop.UCropFragmentCallback;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import java.io.File;
-import java.sql.SQLException;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 import me.relex.circleindicator.CircleIndicator;
 
+import static com.example.lovedays.common.DateUtils.getCHD;
+import static com.example.lovedays.common.DateUtils.getOld;
+import static com.example.lovedays.common.LoveCommon.BACH_DUONG;
+import static com.example.lovedays.common.LoveCommon.BAO_BINH;
+import static com.example.lovedays.common.LoveCommon.BO_CAP;
+import static com.example.lovedays.common.LoveCommon.CU_GIAI;
+import static com.example.lovedays.common.LoveCommon.KIM_NGUU;
+import static com.example.lovedays.common.LoveCommon.MA_KET;
+import static com.example.lovedays.common.LoveCommon.NHAN_MA;
+import static com.example.lovedays.common.LoveCommon.SONG_NGU;
+import static com.example.lovedays.common.LoveCommon.SONG_TU;
+import static com.example.lovedays.common.LoveCommon.SU_TU;
+import static com.example.lovedays.common.LoveCommon.THIEN_BINH;
+import static com.example.lovedays.common.LoveCommon.XU_NU;
+
 public class MainInfoActivity extends BaseActivity implements
-        ProgressGenerator.OnCompleteListener, DatabaseOnListener, UCropFragmentCallback {
+        ProgressGenerator.OnCompleteListener, DatabaseLoverOnListener, UCropFragmentCallback {
 
     //==================================================================
     // Contant
@@ -103,6 +116,9 @@ public class MainInfoActivity extends BaseActivity implements
     private ImageView mImageSexLover1, mImageSexLover2;
     private UCropFragment fragment;
     private CircleImageView mImageCropLover;
+    private TextView mOldLover1, mOldLover2;
+    private TextView mNameCHDLover1, mNameCHDLover2;
+    private ImageView mImageCHDLover1, mImageCHDLover2;
     //==================================================================
     // Values
     //==================================================================
@@ -142,6 +158,7 @@ public class MainInfoActivity extends BaseActivity implements
     // Dang chon edit lover nao ? lover1 = 1, lover2 = 2
     private int CLICK_LOVER = 1;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,44 +192,27 @@ public class MainInfoActivity extends BaseActivity implements
 
         // Get data lover 1
         InfoPersonal lover1 = databaseService.getPerson(ID_LOVER_1);
-        if (lover1 != null) {
-            mLover1Name.setText(lover1.getName());
-            setImageSex(lover1.getSex(), mImageSexLover1);
-            // Set image
-            if (lover1.getImage() != null) {
-                mImageLover1.setImageURI(null);
-                mImageLover1.setImageURI(Uri.parse(lover1.getImage()));
-            }
-        }
+        setInforLover(lover1, Integer.parseInt(ID_LOVER_1));
 
         // Get data lover 2
         InfoPersonal lover2 = databaseService.getPerson(ID_LOVER_2);
-        if (lover2 != null) {
-            mLover2Name.setText(lover2.getName());
-            setImageSex(lover2.getSex(), mImageSexLover2);
-
-            // Set image
-            if (lover2.getImage() != null) {
-                mImageLover2.setImageURI(null);
-                mImageLover2.setImageURI(Uri.parse(lover2.getImage()));
-            }
-        }
+        setInforLover(lover2, Integer.parseInt(ID_LOVER_2));
 
         // Animation hearth
         animationHearth();
 
         // Click lover1
-        mImageLover1.setOnClickListener(new View.OnClickListener() {
+        mImageLover1.setOnClickListener(new SingleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void performClick(View v) {
                 CLICK_LOVER = 1;
                 displayDialogSettingProfile(ID_LOVER_1);
             }
         });
 
-        mImageLover2.setOnClickListener(new View.OnClickListener() {
+        mImageLover2.setOnClickListener(new SingleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void performClick(View v) {
                 CLICK_LOVER = 2;
                 displayDialogSettingProfile(ID_LOVER_2);
             }
@@ -220,6 +220,48 @@ public class MainInfoActivity extends BaseActivity implements
 
         // Show view
         waitProgressActivity();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setInforLover(InfoPersonal lover, int forLover) {
+
+        // For lover1
+        if (lover != null && forLover == 1) {
+
+            mLover1Name.setText(lover.getName());
+            setImageSex(lover.getSex(), mImageSexLover1);
+            // Set image
+            if (lover.getImage() != null) {
+                mImageLover1.setImageURI(null);
+                mImageLover1.setImageURI(Uri.parse(lover.getImage()));
+            }
+
+            try {
+                mOldLover1.setText(Integer.toString(getOld(lover.getBirthDay())));
+                setCHD(mNameCHDLover1, mImageCHDLover1, lover.getBirthDay());
+            } catch (LoveDaysCountDayException e) {
+                Toasty.error(getApplicationContext(), getString(R.string.error), Toast.LENGTH_SHORT, true).show();
+            }
+
+        } else if (lover != null && forLover == 2) {
+
+            mLover2Name.setText(lover.getName());
+            setImageSex(lover.getSex(), mImageSexLover2);
+
+            // Set image
+            if (lover.getImage() != null) {
+                mImageLover2.setImageURI(null);
+                mImageLover2.setImageURI(Uri.parse(lover.getImage()));
+            }
+
+            try {
+                mOldLover2.setText(Integer.toString(getOld(lover.getBirthDay())));
+                setCHD(mNameCHDLover2, mImageCHDLover2, lover.getBirthDay());
+            } catch (LoveDaysCountDayException e) {
+                Toasty.error(getApplicationContext(), getString(R.string.error), Toast.LENGTH_SHORT, true).show();
+            }
+
+        }
     }
 
     /**
@@ -248,7 +290,12 @@ public class MainInfoActivity extends BaseActivity implements
         mLover2Name = findViewById(R.id.lover2Name);
         mImageSexLover1 = findViewById(R.id.imageSexLover1);
         mImageSexLover2 = findViewById(R.id.imageSexLover2);
-
+        mOldLover1 = findViewById(R.id.mOldLover1);
+        mOldLover2 = findViewById(R.id.mOldLover2);
+        mNameCHDLover1 = findViewById(R.id.mNameCHDLover1);
+        mNameCHDLover2 = findViewById(R.id.mNameCHDLover2);
+        mImageCHDLover1 = findViewById(R.id.imageCHDLover1);
+        mImageCHDLover2 = findViewById(R.id.imageCHDLover2);
         // Process wait
         mProgerBarWaitMainInfo.setVisibility(View.VISIBLE);
         setVisibleGroupView(View.INVISIBLE);
@@ -345,6 +392,7 @@ public class MainInfoActivity extends BaseActivity implements
             mEditName.setText(lover.getName());
             mEditBirthDay.setText(lover.getBirthDay());
             checkRadioSex(mRadioGroupSex, lover.getSex());
+            SEX_TYLE = lover.getSex();
             // Set image
             if (lover.getImage() != null) {
                 mImageCropLover.setImageURI(null);
@@ -354,38 +402,48 @@ public class MainInfoActivity extends BaseActivity implements
             }
         }
 
-        // Click button image to crop
-        mImageCropLover.setOnClickListener(new View.OnClickListener() {
+        // Crop image
+        mImageCropLover.setOnClickListener(new SingleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void performClick(View v) {
                 pickFromGallery();
             }
         });
 
-        // Click button update
-        mButtonUpdate.setOnClickListener(new View.OnClickListener() {
+        // Click button image to crop
+        mButtonUpdate.setOnClickListener(new SingleClickListener() {
             @Override
-            public void onClick(View v) {
-                InfoPersonal personal = new InfoPersonal();
-                personal.setId(id);
-                personal.setName(mEditName.getText().toString().trim());
-                personal.setBirthDay(mEditBirthDay.getText().toString().trim());
-                personal.setSex(SEX_TYLE);
-                personal.setImage(pathImageCrop);
+            public void performClick(View v) {
 
-                // Check exist data
-                if (isExistPerson) {
-                    // Show wait progress
-                    showProcess();
+                // Case date format dd/MM/yyyy
+                String birthDay = mEditBirthDay.getText().toString().trim();
+                if(birthDay.length() == 10 && new DateUtils().isValidDate(birthDay)) {
 
-                    // If exist then update
-                    databaseService.updatePerson(personal);
+                    InfoPersonal personal = new InfoPersonal();
+                    personal.setId(id);
+                    personal.setName(mEditName.getText().toString().trim());
+                    personal.setBirthDay(mEditBirthDay.getText().toString().trim());
+                    personal.setSex(SEX_TYLE);
+                    personal.setImage(pathImageCrop);
+
+                    // Check exist data
+                    if (isExistPerson) {
+                        // Show wait progress
+                        showProcess();
+
+                        // If exist then update
+                        databaseService.updatePerson(personal);
+                    } else {
+                        // Show wait progress
+                        showProcess();
+
+                        // If not exist then add
+                        databaseService.addPerson(personal);
+                    }
+
                 } else {
-                    // Show wait progress
-                    showProcess();
-
-                    // If not exist then add
-                    databaseService.addPerson(personal);
+                    cancelProcess();
+                    Toasty.error(getApplicationContext(), getString(R.string.vailidate_startday_error), Toast.LENGTH_SHORT, true).show();
                 }
             }
         });
@@ -400,6 +458,13 @@ public class MainInfoActivity extends BaseActivity implements
     }
 
     /**
+     * Cancel process wait
+     */
+    private void cancelProcess() {
+        progressDialog.dismiss();
+    }
+
+    /**
      * Show process
      */
     private void showProcess() {
@@ -410,9 +475,6 @@ public class MainInfoActivity extends BaseActivity implements
         progressDialog.show();
     }
 
-    private void checkValidate() {
-
-    }
 
     private void animationTimeLove(WaveView waveView) {
         waveView.setShapeType(WaveView.ShapeType.SQUARE);
@@ -450,41 +512,30 @@ public class MainInfoActivity extends BaseActivity implements
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void updPersonSuccess(String id) {
         // Update or add succec then set values for lover
         InfoPersonal lover = databaseService.getPerson(id);
-        if (lover != null && ID_LOVER_1.equals(id)) {
+        if (ID_LOVER_1.equals(id)) {
 
-            mLover1Name.setText(lover.getName());
-            setImageSex(lover.getSex(), mImageSexLover1);
+            setInforLover(lover, Integer.parseInt(ID_LOVER_1));
+        } else if (ID_LOVER_2.equals(id)) {
 
-            if (lover.getImage() != null) {
-                mImageLover1.setImageURI(null);
-                mImageLover1.setImageURI(Uri.parse(lover.getImage()));
-            }
-        } else if (lover != null && ID_LOVER_2.equals(id)) {
-
-            mLover2Name.setText(lover.getName());
-            setImageSex(lover.getSex(), mImageSexLover2);
-
-            if (lover.getImage() != null) {
-                mImageLover2.setImageURI(null);
-                mImageLover2.setImageURI(Uri.parse(lover.getImage()));
-            }
+            setInforLover(lover, Integer.parseInt(ID_LOVER_2));
         }
 
         waitProgress(dialogUpdateLocer, false);
     }
 
     @Override
-    public void updPersionError(String error) {
-
+    public void updPersonError(String error) {
+        Toasty.error(this, getString(R.string.update_error), Toast.LENGTH_SHORT, true).show();
     }
 
     @Override
     public void getPersonError(String error) {
-        Log.i("GET_PERSON", error);
+        Toasty.error(getApplicationContext(), getString(R.string.error), Toast.LENGTH_SHORT, true).show();
     }
 
     /**
@@ -512,6 +563,61 @@ public class MainInfoActivity extends BaseActivity implements
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setCHD(TextView view, ImageView imgView, String birthDay) throws LoveDaysCountDayException {
+        int cHD = getCHD(birthDay);
+        switch (cHD) {
+            case BACH_DUONG:
+                view.setText(getString(R.string.bd));
+                imgView.setImageResource(R.drawable.cungbachduongicon);
+                break;
+            case KIM_NGUU:
+                view.setText(getString(R.string.kn));
+                imgView.setImageResource(R.drawable.cungkimnguuicon);
+                break;
+            case SONG_TU:
+                view.setText(getString(R.string.st));
+                imgView.setImageResource(R.drawable.cungsongtuicon);
+                break;
+            case CU_GIAI:
+                view.setText(getString(R.string.cg));
+                imgView.setImageResource(R.drawable.cungcugiaiicon);
+                break;
+            case SU_TU:
+                view.setText(getString(R.string.sutu));
+                imgView.setImageResource(R.drawable.cungsutuicon);
+                break;
+            case XU_NU:
+                view.setText(getString(R.string.xn));
+                imgView.setImageResource(R.drawable.cungxunuicon);
+                break;
+            case THIEN_BINH:
+                view.setText(getString(R.string.tb));
+                imgView.setImageResource(R.drawable.cungthienbinhicon);
+                break;
+            case BO_CAP:
+                view.setText(getString(R.string.bc));
+                imgView.setImageResource(R.drawable.cungbocapicon);
+                break;
+            case NHAN_MA:
+                view.setText(getString(R.string.nm));
+                imgView.setImageResource(R.drawable.cungnhanmaicon);
+                break;
+            case MA_KET:
+                view.setText(getString(R.string.mk));
+                imgView.setImageResource(R.drawable.cungmaketicon);
+                break;
+            case BAO_BINH:
+                view.setText(getString(R.string.bd));
+                imgView.setImageResource(R.drawable.cungbaobinhicon);
+                break;
+            case SONG_NGU:
+                view.setText(getString(R.string.sn));
+                imgView.setImageResource(R.drawable.cungsongnguicon);
+                break;
+        }
+    }
+
     /**
      * Wait process dialog
      * @param dialog
@@ -533,6 +639,7 @@ public class MainInfoActivity extends BaseActivity implements
                             dialog.show();
                         } else {
                             dialog.cancel();
+                            Toasty.success(getApplicationContext(), getString(R.string.update_success), Toast.LENGTH_SHORT, true).show();
                         }
                     }
                 });
@@ -578,19 +685,6 @@ public class MainInfoActivity extends BaseActivity implements
         constraintLayout.startAnimation(fadeIn);
     }
 
-    private void createfolderSaveImage() {
-        File folder = new File(Environment.getExternalStorageDirectory() +
-                File.separator + APP_NAME);
-        boolean success = true;
-        if (!folder.exists()) {
-            success = folder.mkdirs();
-        }
-        if (success) {
-            // Do something on success
-        } else {
-            // Do something else on failure
-        }
-    }
     /**
      * Pick image
      */
