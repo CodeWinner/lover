@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
             android:layout_weight="1"
-            android:text="LBGT" />
+            android:text="LGBT" />
 
     </RadioGroup>
 
@@ -142,6 +142,7 @@
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
         android:backgroundTint="@color/colorPrimary"
         android:text="Update"
         android:layout_marginRight="20dp"

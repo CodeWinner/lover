@@ -16,7 +16,10 @@ public class LoveCommon {
     public static final String APP_THEME = "THEME";
     public static final String APP_BACKGROUND = "BACKGROUND";
     public static final String APP_LOVE_TEXT = "LOVE_TEXT";
-    public static final String APP_MUSIC = "MUSIC";
+    public static final String APP_MUSIC_NAME = "MUSIC_NAME";
+    public static final String APP_MUSIC_PATH = "MUSIC_PATH";
+    public static final String APP_MUSIC_MESS_NAME = "MUSIC_MESS_NAME";
+    public static final String APP_MUSIC_MESS_PATH = "MUSIC_MESS_PATH";
     public static final String APP_RATED = "RATED";
     public static final String APP_NOTIFICATION = "NOTIFICATION";
     public static final String APP_LOGO_IMAGE = "LOGO_IMAGE";
@@ -24,13 +27,21 @@ public class LoveCommon {
     public static final String TABLE_TIME_LINE = "TIME_LINE";
     public static final String TL_ID = "ID";
     public static final String TL_DATE = "TL_DATE";
+    public static final String TL_COUNT_DATE = "TL_COUNT_DATE";
     public static final String TL_SUBJECT = "TL_SUBJECT";
     public static final String TL_CONTENT =  "TL_CONTENT";
     public static final String TL_STATUS =  "TL_STATUS";
+    public static final String TL_TYPE =  "TL_TYPE";
+    public static final String TL_IMAGE_PATH_1 =  "TL_IMAGE_PATH_1";
+    public static final String TL_IMAGE_PATH_2 =  "TL_IMAGE_PATH_2";
+    public static final String TL_IMAGE_PATH_3 =  "TL_IMAGE_PATH_3";
 
     public static final String REGEX_PATERN_VALI_DATE = "(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\\\d\\\\d)";
     public static final String KEY_UPDATE_START_DAY_COUNT =  "KEY_COUNT";
     public static final String KEY_POSITION_CAR_X =  "P_X";
+    public static final String KEY_UPDATE_MUSIC_BG =  "KEY_UPDATE_MUSIC_BG";
+    public static final String KEY_UPDATE_MUSIC_MESS =  "KEY_UPDATE_MUSIC_MESS";
+    public static final String KEY_APP_THEME =  "KEY_APP_THEME";
     public static final String NAME_SAVE_STORE =  "LOVE_DAY";
 
     public static final String PATH_PATERM = "/";
@@ -47,6 +58,25 @@ public class LoveCommon {
     public static final int BAO_BINH = 11;
     public static final int SONG_NGU = 12;
 
+    // Theme
+    public static final int KEY_THEME_COLOR_1 = 1;
+    public static final int KEY_THEME_COLOR_2 = 2;
+    public static final int KEY_THEME_COLOR_3 = 3;
+    public static final int KEY_THEME_COLOR_4 = 4;
+    public static final int KEY_THEME_COLOR_5 = 5;
+    public static final int KEY_THEME_COLOR_6 = 6;
+    public static final int KEY_THEME_COLOR_7 = 7;
+    public static final int KEY_THEME_COLOR_8 = 8;
+    public static final int KEY_THEME_COLOR_9 = 9;
+    public static final int KEY_THEME_COLOR_10 = 10;
+
     public static final int GOOD_MORNING = 1;
     public static final int GOOD_AFTERNOON = 2;
+
+    public static final String BLANK = "";
+
+    public static final String POS_BUNDLE_STRING = "POS_BUNDLE_STRING";
+
+    public static boolean SINGLE_CLICK_CAR_ANIM = false;
+
 }

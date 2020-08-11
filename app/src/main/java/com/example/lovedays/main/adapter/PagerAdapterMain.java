@@ -26,13 +26,10 @@ public class PagerAdapterMain extends FragmentPagerAdapter {
         Log.i("VIEW_PAGER","VIEW_PAGER" + position);
         switch (position) {
             case 0:
-                Log.i("VIEW_PAGER","PAGE #0");
                 return FragmentMain.newInstance(0, "100");
             case 1:
-                Log.i("VIEW_PAGER","PAGE #1");
                 return FragmentCount.newInstance("");
             case 2:
-                Log.i("VIEW_PAGER","PAGE #2");
                 return FragmentStory.newInstance(2, "PAGE #2");
              default:
                     return null;

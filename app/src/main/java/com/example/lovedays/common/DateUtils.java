@@ -114,6 +114,27 @@ public class DateUtils {
         }
     }
 
+    /**
+     * Count day
+     * @param startDay
+     * @return
+     */
+    public static String addDate(String startDay ,int numberOfDays) throws LoveDaysCountDayException {
+
+        if (startDay == null) {
+            throw new LoveDaysCountDayException();
+        }
+
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(startDay));
+            c.add(Calendar.DAY_OF_YEAR, numberOfDays);
+        } catch (ParseException e) {
+            throw new LoveDaysCountDayException();
+        }
+        return sdf.format(c.getTime());
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static DateUnitCommon getTimeBetween(String startDay) throws LoveDaysCountDayException {
         if (startDay == null) {

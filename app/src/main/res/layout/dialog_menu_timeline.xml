@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="120dp"
+    android:background="@drawable/image_boder"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        android:textColor="@color/text_color"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/blackTS15" />
+
+    <Button
+        android:id="@+id/buttonEditTimeline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Pi50"
+        android:text="Edit"
+        android:textAllCaps="false"
+        android:textColor="@color/text_color"
+        app:backgroundTint="@color/white" />
+
+    <Button
+        android:id="@+id/buttonDeleteTimeline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Pi50"
+        android:text="Delete"
+        android:textAllCaps="false"
+        android:textColor="@color/red_btn_bg_color"
+        app:backgroundTint="@color/Pi50" />
+</LinearLayout>

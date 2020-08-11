@@ -19,8 +19,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" >
 
-    </FrameLayout>
+            <ImageButton
 
+                android:layout_marginLeft="5dp"
+                android:id="@+id/ibtMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+        </FrameLayout>
+
+
+    <nl.dionsegijn.konfetti.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:elevation="2dp"
+        android:layout_height="match_parent" />
     <ProgressBar
         android:id="@+id/progressMainConentInfo"
         style="?android:attr/progressBarStyle"
@@ -271,8 +285,8 @@
 
     <ImageView
         android:id="@+id/mImageHeart"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/iconhearth3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/lImageLover2"

@@ -1,26 +1,33 @@
 package com.example.lovedays.main.fragment;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lovedays.R;
+import com.example.lovedays.main.time_line.TimeLineActivity;
+import com.example.lovedays.main.database.DatabaseService;
+import com.example.lovedays.main.helper.RecyclerItemClickListener;
 import com.example.lovedays.main.helper.TimeLineAdapter;
 import com.example.lovedays.main.units.TimeLine;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+
+import static com.example.lovedays.common.LoveCommon.POS_BUNDLE_STRING;
 
 public class FragmentStory extends Fragment {
     // Store instance variables
@@ -29,14 +36,18 @@ public class FragmentStory extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
+    private ImageButton mButtonAddMemory;
     private RecyclerView.LayoutManager layoutManager;
+    private DatabaseService databaseService ;
+    public List<TimeLine> timeLines = null;
+
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Date currentTime = Calendar.getInstance().getTime();
+    public static int positionTimelineScroll = 0;
+
     // newInstance constructor for creating fragment with arguments
     public static FragmentStory newInstance(int page, String title) {
         FragmentStory fragmentStory = new FragmentStory();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        fragmentStory.setArguments(args);
         return fragmentStory;
     }
 
@@ -44,9 +55,8 @@ public class FragmentStory extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_story, container, false);
-//        TextView tvLabel = view.findViewById(R.id.txtTitle3);
-//        tvLabel.setText(page + " -- " + title);
         recyclerView = view.findViewById(R.id.TimeLineRecycle);
+        mButtonAddMemory = view.findViewById(R.id.imageButtonAddMemory);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -57,32 +67,44 @@ public class FragmentStory extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        List<TimeLine> timeLines = new ArrayList<>();
-        TimeLine a = new TimeLine();
-        a.setId("1");
-        a.setDate("12/02/96");
-        a.setStatus("inactive");
-        timeLines.add(a);
-        TimeLine b = new TimeLine();
-        b.setId("1");
-        b.setDate("12/02/96");
-        b.setStatus("inactive");
-        timeLines.add(b);
-        TimeLine c = new TimeLine();
-        c.setId("1");
-        c.setDate("12/02/96");
-        c.setStatus("active");
-        timeLines.add(c);
-        TimeLine d = new TimeLine();
-        d.setId("1");
-        d.setDate("12/02/96");
-        timeLines.add(d);
-        TimeLine e = new TimeLine();
-        e.setId("1");
-        e.setDate("12/02/96");
-        timeLines.add(e);
-        mAdapter = new TimeLineAdapter(timeLines, getContext());
-        recyclerView.setAdapter(mAdapter);
+        // Select data timeline in SQL
+        timeLines = databaseService.getAllTimeline();
+
+        if (timeLines != null  && timeLines.size() > 0) {
+            Collections.sort(timeLines);
+
+            mAdapter = new TimeLineAdapter(setStatusTimeline(timeLines), getContext());
+            recyclerView.setAdapter(mAdapter);
+
+            recyclerView.smoothScrollToPosition(positionTimelineScroll);
+        }
+
+        // Click recycler view
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(getContext(), TimeLineActivity.class);
+                        Bundle dataPosition = new Bundle();
+                        dataPosition.putString(POS_BUNDLE_STRING, position + "");
+                        intent.putExtras(dataPosition);
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left);
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+                    }
+                }));
+
+        mButtonAddMemory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TimeLineActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left);
+            }
+        });
         return view;
     }
 
@@ -90,7 +112,58 @@ public class FragmentStory extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt("someInt");
-        title = getArguments().getString("someTitle");
+
+        databaseService = new DatabaseService(getContext());
+        databaseService.open();
     }
+
+    /**
+     * Set status
+     * @param timeLines
+     * @return
+     */
+    private List<TimeLine> setStatusTimeline(List<TimeLine> timeLines) {
+        int i = 0;
+        do {
+            try {
+                if (timeLines.get(i).getDate() != null
+                        && sdf.parse(timeLines.get(i).getDate()).before(currentTime)) {
+
+                    timeLines.get(i).setStatus("inactive");
+                } else if (timeLines.get(i).getDate() != null
+                        && sdf.parse(timeLines.get(i).getDate()).after(currentTime)
+                        && i != 0) {
+
+                    positionTimelineScroll = i ;
+                    timeLines.get(i-1).setStatus("active");
+                    return timeLines;
+                }
+
+                i++;
+            } catch (ParseException e) {
+                e.printStackTrace();
+                i++;
+            }
+        } while (i < timeLines.size());
+
+        return timeLines;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (databaseService != null) {
+            timeLines = databaseService.getAllTimeline();
+            if (timeLines != null && timeLines.size() > 0) {
+                Collections.sort(timeLines);
+
+                mAdapter = new TimeLineAdapter(setStatusTimeline(timeLines), getContext());
+                recyclerView.setAdapter(mAdapter);
+
+                recyclerView.smoothScrollToPosition(positionTimelineScroll);
+            }
+        }
+    }
+
+
 }

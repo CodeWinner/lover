@@ -14,6 +14,8 @@
         scrolling_image_view:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/mLabel1"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/annie_use_your_telescope"
@@ -24,6 +26,7 @@
 
         <TextView
             android:id="@+id/mTextCountDay"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/annie_use_your_telescope"
@@ -31,9 +34,18 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="50sp" />
+        <com.hanks.htextview.evaporate.EvaporateTextView
+            android:visibility="gone"
+            android:id="@+id/txtEvaporateText"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:textColor="#f7f2f2"
+            android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/mLabel2"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/annie_use_your_telescope"

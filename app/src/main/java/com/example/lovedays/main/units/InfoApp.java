@@ -2,10 +2,13 @@ package com.example.lovedays.main.units;
 
 public class InfoApp {
     private String startDay;
-    private String theme;
+    private String appTheme;
     private String background;
     private String loveText;
-    private String music;
+    private String musicNameBackGround;
+    private String musicPathBackGround;
+    private String musicNameMess;
+    private String musicPathMess;
     private String rated;
     private String notifaction;
     private String logoImage;
@@ -18,12 +21,12 @@ public class InfoApp {
         this.startDay = startDay;
     }
 
-    public String getTheme() {
-        return theme;
+    public String getAppTheme() {
+        return appTheme;
     }
 
-    public void setTheme(String theme) {
-        this.theme = theme;
+    public void setAppTheme(String appTheme) {
+        this.appTheme = appTheme;
     }
 
     public String getBackground() {
@@ -42,12 +45,36 @@ public class InfoApp {
         this.loveText = loveText;
     }
 
-    public String getMusic() {
-        return music;
+    public String getMusicNameBackGround() {
+        return musicNameBackGround;
     }
 
-    public void setMusic(String music) {
-        this.music = music;
+    public void setMusicNameBackGround(String musicNameBackGround) {
+        this.musicNameBackGround = musicNameBackGround;
+    }
+
+    public String getMusicPathBackGround() {
+        return musicPathBackGround;
+    }
+
+    public void setMusicPathBackGround(String musicPathBackGround) {
+        this.musicPathBackGround = musicPathBackGround;
+    }
+
+    public String getMusicNameMess() {
+        return musicNameMess;
+    }
+
+    public void setMusicNameMess(String musicNameMess) {
+        this.musicNameMess = musicNameMess;
+    }
+
+    public String getMusicPathMess() {
+        return musicPathMess;
+    }
+
+    public void setMusicPathMess(String musicPathMess) {
+        this.musicPathMess = musicPathMess;
     }
 
     public String getRated() {

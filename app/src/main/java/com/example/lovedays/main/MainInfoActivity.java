@@ -3,13 +3,17 @@ package com.example.lovedays.main;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,29 +22,40 @@ import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lovedays.BuildConfig;
 import com.example.lovedays.R;
 import com.example.lovedays.common.DateUtils;
+import com.example.lovedays.common.SaveSharedPreferences;
 import com.example.lovedays.common.exception.LoveDaysCountDayException;
 import com.example.lovedays.main.adapter.PagerAdapterMain;
 import com.example.lovedays.main.crop_image.BaseActivity;
+import com.example.lovedays.main.database.DatabaseInfoAppListener;
 import com.example.lovedays.main.database.DatabaseLoverOnListener;
 import com.example.lovedays.main.database.DatabaseService;
 import com.example.lovedays.main.fragment.FragmentCount;
+import com.example.lovedays.main.fragment.FragmentMain;
 import com.example.lovedays.main.helper.ProgressGenerator;
 import com.example.lovedays.common.SingleClickListener;
 import com.example.lovedays.main.helper.WaveHelper;
+import com.example.lovedays.main.menu.MenuActivity;
+import com.example.lovedays.main.time_line.TimeLineActivity;
+import com.example.lovedays.main.units.InfoApp;
 import com.example.lovedays.main.units.InfoPersonal;
+import com.example.lovedays.main.units.TimeLine;
 import com.gelitenight.waveview.library.WaveView;
 import com.google.android.material.button.MaterialButton;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.UCropFragment;
 import com.yalantis.ucrop.UCropFragmentCallback;
@@ -54,18 +69,50 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import java.io.File;
+import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import me.relex.circleindicator.CircleIndicator;
+import nl.dionsegijn.konfetti.KonfettiView;
+import nl.dionsegijn.konfetti.models.Shape;
+import nl.dionsegijn.konfetti.models.Size;
+import su.levenetc.android.textsurface.Text;
+import su.levenetc.android.textsurface.TextBuilder;
+import su.levenetc.android.textsurface.TextSurface;
+import su.levenetc.android.textsurface.animations.Alpha;
+import su.levenetc.android.textsurface.animations.Delay;
+import su.levenetc.android.textsurface.animations.Sequential;
+import su.levenetc.android.textsurface.animations.Slide;
+import su.levenetc.android.textsurface.contants.Align;
+import su.levenetc.android.textsurface.contants.Side;
 
 import static com.example.lovedays.common.DateUtils.getCHD;
+import static com.example.lovedays.common.DateUtils.getNumDaysFromCurrentTime;
 import static com.example.lovedays.common.DateUtils.getOld;
+import static com.example.lovedays.common.LoveCommon.APP_LOVE_TEXT;
+import static com.example.lovedays.common.LoveCommon.APP_MUSIC_MESS_NAME;
+import static com.example.lovedays.common.LoveCommon.APP_MUSIC_MESS_PATH;
 import static com.example.lovedays.common.LoveCommon.BACH_DUONG;
 import static com.example.lovedays.common.LoveCommon.BAO_BINH;
 import static com.example.lovedays.common.LoveCommon.BO_CAP;
 import static com.example.lovedays.common.LoveCommon.CU_GIAI;
+import static com.example.lovedays.common.LoveCommon.KEY_THEME_COLOR_1;
+import static com.example.lovedays.common.LoveCommon.KEY_THEME_COLOR_10;
+import static com.example.lovedays.common.LoveCommon.KEY_THEME_COLOR_2;
+import static com.example.lovedays.common.LoveCommon.KEY_THEME_COLOR_3;
+import static com.example.lovedays.common.LoveCommon.KEY_THEME_COLOR_4;
+import static com.example.lovedays.common.LoveCommon.KEY_THEME_COLOR_5;
+import static com.example.lovedays.common.LoveCommon.KEY_THEME_COLOR_6;
+import static com.example.lovedays.common.LoveCommon.KEY_THEME_COLOR_7;
+import static com.example.lovedays.common.LoveCommon.KEY_THEME_COLOR_8;
+import static com.example.lovedays.common.LoveCommon.KEY_THEME_COLOR_9;
 import static com.example.lovedays.common.LoveCommon.KIM_NGUU;
 import static com.example.lovedays.common.LoveCommon.MA_KET;
 import static com.example.lovedays.common.LoveCommon.NHAN_MA;
@@ -95,6 +142,8 @@ public class MainInfoActivity extends BaseActivity implements
     private static final int REQUEST_SELECT_PICTURE_FOR_FRAGMENT = 0x02;
 
     private int requestMode = BuildConfig.RequestMode;
+
+    public  InfoApp infoApp;
     //==================================================================
     // View
     //==================================================================
@@ -103,6 +152,7 @@ public class MainInfoActivity extends BaseActivity implements
     private ImageView mImageHearth;
     private CircleIndicator circleIndicator;
 
+    private RelativeLayout linearLayoutMain;
     private WaveHelper mWaveHelper;
     private WaveView waveView;
 
@@ -119,6 +169,8 @@ public class MainInfoActivity extends BaseActivity implements
     private TextView mOldLover1, mOldLover2;
     private TextView mNameCHDLover1, mNameCHDLover2;
     private ImageView mImageCHDLover1, mImageCHDLover2;
+    private KonfettiView konfettiView;
+    private ImageButton ibtMenu;
     //==================================================================
     // Values
     //==================================================================
@@ -137,6 +189,7 @@ public class MainInfoActivity extends BaseActivity implements
 
     private String SEX_TYLE = SEX_TYLE_MAN;
 
+
     private int mBorderColor = Color.parseColor("#44e91e63");
     private int mBorderWidth = 0;
     private String mToolbarTitle;
@@ -151,6 +204,11 @@ public class MainInfoActivity extends BaseActivity implements
 
     private boolean mShowLoader;
     private String pathImageCrop;
+    public String startDate;
+    public long numDay = 0;
+    public SaveSharedPreferences saveSharedPreferences = new SaveSharedPreferences(this);
+    public boolean isDateEven;
+    public List<TimeLine> timeLines;
     //==================================================================
     // Control flg
     //==================================================================
@@ -163,25 +221,9 @@ public class MainInfoActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_info);
-
+        Log.i("LIFE", "onCreate");
         // Init view
         initView();
-
-        // animation song
-        waveView.setWaveColor(
-                Color.parseColor("#40f06292"),
-                Color.parseColor("#80f06292"));
-        mBorderColor = Color.parseColor("#B0f06292");
-        waveView.setBorder(mBorderWidth, mBorderColor);
-        mWaveHelper = new WaveHelper(waveView);
-        waveView.setShapeType(WaveView.ShapeType.SQUARE);
-
-
-        // Set color win bar
-        if (Build.VERSION.SDK_INT >= 21) {
-            window = this.getWindow();
-            window.setStatusBarColor(this.getResources().getColor(R.color.Pi300));
-        }
 
         // view pager
         PagerAdapterMain pagerAdapter = new PagerAdapterMain(getSupportFragmentManager());
@@ -218,8 +260,124 @@ public class MainInfoActivity extends BaseActivity implements
             }
         });
 
+        ibtMenu.setOnClickListener(new SingleClickListener() {
+            @Override
+            public void performClick(View v) {
+                Intent intent = new Intent(getApplicationContext() , MenuActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
+            }
+        });
+
         // Show view
         waitProgressActivity();
+    }
+
+    private void setColorBar(int colorCd) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            window = this.getWindow();
+            window.setStatusBarColor(colorCd);
+        }
+    }
+
+    /**
+     * Click color select
+     * @param colorCd
+     */
+    private void setColotTheme(int colorCd) {
+
+        switch (colorCd) {
+            case KEY_THEME_COLOR_1:
+                // Set color win bar
+                setColorBar(this.getResources().getColor(R.color.Pi300));
+                aniWaveview(this.getResources().getColor(R.color.color_select_1_1), this.getResources().getColor(R.color.color_select_1));
+                break;
+            case KEY_THEME_COLOR_2:
+                // Set color win bar
+                setColorBar(this.getResources().getColor(R.color.color_bar_2));
+                aniWaveview(this.getResources().getColor(R.color.color_select_2_1), this.getResources().getColor(R.color.color_select_2));
+                break;
+            case KEY_THEME_COLOR_3:
+                // Set color win bar
+                setColorBar(this.getResources().getColor(R.color.color_bar_3));
+                aniWaveview(this.getResources().getColor(R.color.color_select_3_1), this.getResources().getColor(R.color.color_select_3));
+                break;
+            case KEY_THEME_COLOR_4:
+                // Set color win bar
+                setColorBar(this.getResources().getColor(R.color.color_bar_4));
+                aniWaveview(this.getResources().getColor(R.color.color_select_4_1), this.getResources().getColor(R.color.color_select_4));
+                break;
+            case KEY_THEME_COLOR_5:
+                setColorBar(this.getResources().getColor(R.color.color_bar_5));
+                aniWaveview(this.getResources().getColor(R.color.color_select_5_1), this.getResources().getColor(R.color.color_select_5));
+                break;
+            case KEY_THEME_COLOR_6:
+                setColorBar(this.getResources().getColor(R.color.color_bar_6));
+                aniWaveview(this.getResources().getColor(R.color.color_select_6_1), this.getResources().getColor(R.color.color_select_6));
+                break;
+            case KEY_THEME_COLOR_7:
+                setColorBar(this.getResources().getColor(R.color.color_bar_7));
+                aniWaveview(this.getResources().getColor(R.color.color_select_7_1), this.getResources().getColor(R.color.color_select_7));
+                break;
+            case KEY_THEME_COLOR_8:
+                setColorBar(this.getResources().getColor(R.color.color_bar_8));
+                aniWaveview(this.getResources().getColor(R.color.color_select_8_1), this.getResources().getColor(R.color.color_select_8));
+                break;
+            case KEY_THEME_COLOR_9:
+                setColorBar(this.getResources().getColor(R.color.color_bar_9));
+                aniWaveview(this.getResources().getColor(R.color.color_select_9_1), this.getResources().getColor(R.color.color_select_9));
+                break;
+            case KEY_THEME_COLOR_10:
+                setColorBar(this.getResources().getColor(R.color.color_bar_10));
+                aniWaveview(this.getResources().getColor(R.color.color_select_10_1), this.getResources().getColor(R.color.color_select_10));
+                break;
+        }
+    }
+    /**
+     * Check to day has even
+     * @return
+     */
+    private boolean isCheckTodayEven(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String currentDateandTime = sdf.format(new Date());
+
+        boolean isEven = false;
+        if (timeLines != null) {
+            for (int i = 0; i < timeLines.size(); i++) {
+                if (currentDateandTime.equals(timeLines.get(i).getDate())) {
+                    isEven = true;
+                }
+            }
+        }
+
+        if (isEven == false && numDay == 100) {
+            isEven = true;
+        }
+         return isEven;
+    }
+
+    /**
+     * Set wave view
+     */
+    private void aniWaveview(int color1_1, int color1) {
+
+        numDay = 20;
+        if (startDate != null) {
+            try {
+                numDay = getNumDaysFromCurrentTime(startDate) ;
+            } catch (LoveDaysCountDayException e) {
+                Toasty.error(this, getString(R.string.error), Toast.LENGTH_SHORT, true).show();
+            }
+        }
+
+        numDay = (numDay%100) == 0 ? 100 : numDay%100;
+        float trsF = (float) ((float)(numDay)/(100*1.0));
+        // animation song
+        waveView.setWaveColor(color1_1,color1);
+        mBorderColor = Color.parseColor("#B0f06292");
+        waveView.setBorder(mBorderWidth, mBorderColor);
+        mWaveHelper = new WaveHelper(waveView, trsF);
+        waveView.setShapeType(WaveView.ShapeType.SQUARE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -230,10 +388,14 @@ public class MainInfoActivity extends BaseActivity implements
 
             mLover1Name.setText(lover.getName());
             setImageSex(lover.getSex(), mImageSexLover1);
+
+            final File file = new File(lover.getImage());
             // Set image
-            if (lover.getImage() != null) {
+            if (lover.getImage() != null && file.exists()) {
                 mImageLover1.setImageURI(null);
                 mImageLover1.setImageURI(Uri.parse(lover.getImage()));
+            } else {
+                mImageLover1.setImageResource(R.drawable.change_image);
             }
 
             try {
@@ -248,10 +410,13 @@ public class MainInfoActivity extends BaseActivity implements
             mLover2Name.setText(lover.getName());
             setImageSex(lover.getSex(), mImageSexLover2);
 
+            final File file = new File(lover.getImage());
             // Set image
-            if (lover.getImage() != null) {
+            if (lover.getImage() != null && file.exists()) {
                 mImageLover2.setImageURI(null);
                 mImageLover2.setImageURI(Uri.parse(lover.getImage()));
+            } else {
+                mImageLover2.setImageResource(R.drawable.change_image);
             }
 
             try {
@@ -276,6 +441,7 @@ public class MainInfoActivity extends BaseActivity implements
         // createfolderSaveImage();
 
         // Init
+        linearLayoutMain = findViewById(R.id.linearLayoutMain);
         mProgerBarWaitMainInfo = findViewById(R.id.progressMainConentInfo);
         mLayoutContentMainInfoLayout = findViewById(R.id.contentMainInfoLayout);
         mLayoutImageLover1 = findViewById(R.id.lImageLover1);
@@ -296,10 +462,94 @@ public class MainInfoActivity extends BaseActivity implements
         mNameCHDLover2 = findViewById(R.id.mNameCHDLover2);
         mImageCHDLover1 = findViewById(R.id.imageCHDLover1);
         mImageCHDLover2 = findViewById(R.id.imageCHDLover2);
+        ibtMenu = findViewById(R.id.ibtMenu);
         // Process wait
         mProgerBarWaitMainInfo.setVisibility(View.VISIBLE);
         setVisibleGroupView(View.INVISIBLE);
+
+        konfettiView = findViewById(R.id.konfettiView);
+
+        // Select data start day
+        startDate = databaseService.getStartDay();
+        if (startDate == null) {
+            databaseService.addDefaultInfo();
+            startDate = databaseService.getStartDay();
+        }
+
+        timeLines = new ArrayList<>();
+        timeLines = databaseService.getAllTimeline();
+
+       settingDisplay();
+
     }
+
+    private String getRealPathFromURI(Uri contentURI) {
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            return contentURI.getPath();
+
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(idx);
+        }
+    }
+
+    /**
+     * Seting display
+     */
+    private void settingDisplay() {
+
+        setColotTheme(saveSharedPreferences.getAppTheme());
+        infoApp = databaseService.getInforApp();
+        FragmentMain.infoApp = infoApp;
+
+        if (infoApp != null) {
+            if (infoApp.getBackground() != null && !infoApp.getBackground().isEmpty()) {
+                String path = getRealPathFromURI(Uri.parse(infoApp.getBackground()));
+                File file = new File(path);
+
+                if (file.exists()) {
+                    Drawable d = Drawable.createFromPath(file.getAbsolutePath());
+                    linearLayoutMain.setBackground(d);
+                }
+            }
+
+//            // Load mussic name bg
+//            if (infoApp.getMusicNameBackGround() != null && !infoApp.getMusicNameBackGround().isEmpty()) {
+//                textNameSound.setText(infoApp.getMusicNameBackGround());
+//                setAnimation(textNameSound);
+//            }
+//
+//            // Load mussic name bg
+//            if (infoApp.getMusicNameMess() != null && !infoApp.getMusicNameMess().isEmpty()) {
+//                textNameMusicMessage.setText(infoApp.getMusicNameMess());
+//                setAnimation(textNameMusicMessage);
+//            }
+//
+//            // Set message
+//            if (infoApp.getLoveText() != null) {
+//                edtDescriptionLove.setText(infoApp.getLoveText());
+//            }
+        }
+    }
+
+    /**
+     * Send data to fragmeny
+     * @param mess
+     * @param musicName
+     * @param musicPath
+     */
+//    private void sendDataToFragment(String mess, String musicName, String musicPath) {
+//        Bundle args = new Bundle();
+//        args.putString(APP_LOVE_TEXT, mess);
+//        args.putString(APP_MUSIC_MESS_NAME, musicName);
+//        args.putString(APP_MUSIC_MESS_PATH, musicPath);
+//        FragmentMain fragInfo = new FragmentMain();
+//        fragInfo.setArguments(args);
+//        transaction.replace(R.id.fragment_main, fragInfo);
+//        transaction.commit();
+//    }
 
     /**
      * Set visible group view
@@ -312,6 +562,7 @@ public class MainInfoActivity extends BaseActivity implements
         mViewPager.setVisibility(visible);
         mImageHearth.setVisibility(visible);
         circleIndicator.setVisibility(visible);
+        ibtMenu.setVisibility(visible);
 
     }
 
@@ -393,12 +644,16 @@ public class MainInfoActivity extends BaseActivity implements
             mEditBirthDay.setText(lover.getBirthDay());
             checkRadioSex(mRadioGroupSex, lover.getSex());
             SEX_TYLE = lover.getSex();
+
+            final File file = new File(lover.getImage());
             // Set image
-            if (lover.getImage() != null) {
+            if (lover.getImage() != null && file.exists()) {
                 mImageCropLover.setImageURI(null);
                 mImageCropLover.setImageURI(Uri.parse(lover.getImage()));
 
                 pathImageCrop = lover.getImage();
+            } else {
+                mImageCropLover.setImageResource(R.drawable.change_image);
             }
         }
 
@@ -503,7 +758,9 @@ public class MainInfoActivity extends BaseActivity implements
     @Override
     protected void onResume() {
         super.onResume();
+        // get infor db
         mWaveHelper.start();
+
     }
 
     @Override
@@ -535,7 +792,6 @@ public class MainInfoActivity extends BaseActivity implements
 
     @Override
     public void getPersonError(String error) {
-        Toasty.error(getApplicationContext(), getString(R.string.error), Toast.LENGTH_SHORT, true).show();
     }
 
     /**
@@ -683,6 +939,21 @@ public class MainInfoActivity extends BaseActivity implements
         setVisibleGroupView(View.VISIBLE);
         mProgerBarWaitMainInfo.setVisibility(View.GONE);
         constraintLayout.startAnimation(fadeIn);
+
+
+        if (isCheckTodayEven()) {
+            konfettiView.build()
+                    .addColors(this.getResources().getColor(R.color.PB1), this.getResources().getColor(R.color.PB2), this.getResources().getColor(R.color.PB3))
+                    .setDirection(0.0, 359.0)
+                    .setSpeed(1f, 5f)
+                    .setFadeOutEnabled(true)
+                    .setTimeToLive(2000L)
+                    .addShapes(Shape.Square.INSTANCE, Shape.Circle.INSTANCE)
+                    .addSizes(new Size(12, 5f))
+                    .setPosition(-50f, konfettiView.getWidth() + 50f, -50f, -50f)
+                    .streamFor(300, 5000L);
+        }
+
     }
 
     /**
@@ -708,7 +979,6 @@ public class MainInfoActivity extends BaseActivity implements
             if (requestCode == requestMode) {
                 final Uri selectedUri = data.getData();
                 if (selectedUri != null) {
-                    Log.i("CROP_IMAGE", "START_CROP");
                     startCrop(selectedUri);
                 } else {
                     Toast.makeText(MainInfoActivity.this, R.string.toast_cannot_retrieve_selected_image, Toast.LENGTH_SHORT).show();
@@ -730,7 +1000,6 @@ public class MainInfoActivity extends BaseActivity implements
         final Uri resultUri = UCrop.getOutput(result);
         if (resultUri != null) {
            // ResultActivity.startWithUri(SampleActivity.this, resultUri);
-            Log.i("CROP_IMAGE", resultUri.toString());
             mImageCropLover.setImageURI(null);
             mImageCropLover.setImageURI(resultUri);
             pathImageCrop = resultUri.getPath();
@@ -892,5 +1161,15 @@ public class MainInfoActivity extends BaseActivity implements
                 .remove(fragment)
                 .commit();
         mLayoutContentMainInfoLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
     }
 }

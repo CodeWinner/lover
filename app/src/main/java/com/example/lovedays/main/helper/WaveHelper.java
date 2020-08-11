@@ -17,9 +17,9 @@ public class WaveHelper {
 
     private AnimatorSet mAnimatorSet;
 
-    public WaveHelper(WaveView waveView) {
+    public WaveHelper(WaveView waveView, float endTime) {
         mWaveView = waveView;
-        initAnimation();
+        initAnimation(endTime);
     }
 
     public void start() {
@@ -29,7 +29,7 @@ public class WaveHelper {
         }
     }
 
-    private void initAnimation() {
+    private void initAnimation(float endTime) {
         List<Animator> animators = new ArrayList<>();
 
         // horizontal animation.
@@ -44,7 +44,7 @@ public class WaveHelper {
         // vertical animation.
         // water level increases from 0 to center of WaveView
         ObjectAnimator waterLevelAnim = ObjectAnimator.ofFloat(
-                mWaveView, "waterLevelRatio", 0f, 0.2f);
+                mWaveView, "waterLevelRatio", 0f, endTime);
         waterLevelAnim.setDuration(10000);
         waterLevelAnim.setInterpolator(new DecelerateInterpolator());
         animators.add(waterLevelAnim);
@@ -52,7 +52,7 @@ public class WaveHelper {
         // amplitude animation.
         // wave grows big then grows small, repeatedly
         ObjectAnimator amplitudeAnim = ObjectAnimator.ofFloat(
-                mWaveView, "amplitudeRatio", 0.0001f, 0.02f);
+                mWaveView, "amplitudeRatio", 0.0001f, 0.01f);
         amplitudeAnim.setRepeatCount(ValueAnimator.INFINITE);
         amplitudeAnim.setRepeatMode(ValueAnimator.REVERSE);
         amplitudeAnim.setDuration(5000);

@@ -48,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_timeline_date"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     tools:text="24 JAN"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -56,38 +56,52 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:id="@+id/text_timeline_title"
+                    android:textSize="17dp"
+                    android:fontFamily="@font/lobster"
                     android:textColor="@android:color/black"
                     tools:text="Order Successfully Completed"/>
-
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="20dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:text=""
+                    android:textColor="@color/Or500"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+<!--                android:textColor="@color/gray_btn_bg_pressed_color"-->
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="2dp"
-                android:background="@color/blackTS15" />
-            <LinearLayout
-                android:paddingLeft="10dp"
-               android:layout_marginTop="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:background="@color/blackTS15" />-->
+<!--            <LinearLayout-->
+<!--                android:paddingLeft="10dp"-->
+<!--               android:layout_marginTop="3dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <ImageView
-                    android:layout_marginRight="5dp"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    app:srcCompat="@drawable/logo" />
-                <ImageView
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/logo"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"/>
-                <ImageView
-                    android:layout_marginRight="5dp"
-                    app:srcCompat="@drawable/logo"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"/>
-            </LinearLayout>
+<!--                <ImageView-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="80dp"-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    android:adjustViewBounds="true"-->
+<!--                    app:srcCompat="@drawable/logo" />-->
+<!--                <ImageView-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    app:srcCompat="@drawable/logo"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="80dp"/>-->
+<!--                <ImageView-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    app:srcCompat="@drawable/logo"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="80dp"/>-->
+<!--            </LinearLayout>-->
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

@@ -52,10 +52,7 @@ public class FragmentCount extends Fragment implements ServiceListener{
     // newInstance constructor for creating fragment with arguments
     public static FragmentCount newInstance(String startDay) {
         FragmentCount fragmentCount = new FragmentCount();
-//        Bundle args = new Bundle();
-//        args.putInt("someInt", page);
-//        args.putString("someTitle", title);
-//        fragmentCount.setArguments(args);
+
         return fragmentCount;
     }
 

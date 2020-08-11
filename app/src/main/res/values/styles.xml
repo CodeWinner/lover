@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/Pi300</item>
-<!--        <item name="colorPrimaryDark">@color/Pi300</item>-->
+        <!--        <item name="colorPrimaryDark">@color/Pi300</item>-->
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -23,4 +23,13 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="NoActionBar" parent="Theme.MaterialComponents">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

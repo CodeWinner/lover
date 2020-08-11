@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,7 +36,9 @@ import com.example.lovedays.common.exception.LoveDaysCountDayException;
 import com.example.lovedays.common.service.CountDaysService;
 import com.example.lovedays.main.database.DatabaseInfoAppListener;
 import com.example.lovedays.main.database.DatabaseService;
+import com.example.lovedays.main.units.InfoApp;
 import com.google.android.material.button.MaterialButton;
+import com.hanks.htextview.base.HTextView;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -49,8 +52,12 @@ import es.dmoral.toasty.Toasty;
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.lovedays.common.DateUtils.getNumDaysFromCurrentTime;
 import static com.example.lovedays.common.DateUtils.getTimeBetween;
+import static com.example.lovedays.common.LoveCommon.APP_LOVE_TEXT;
+import static com.example.lovedays.common.LoveCommon.APP_MUSIC_MESS_NAME;
+import static com.example.lovedays.common.LoveCommon.APP_MUSIC_MESS_PATH;
 
-public class FragmentMain extends Fragment implements DatabaseInfoAppListener {
+public class FragmentMain extends BaseFragment implements DatabaseInfoAppListener {
+    public static String PATERN_SPLIT_MESS = "\n";
     public static float MAX_ROAD = 800f;
     public static float MAX_TIME = 86400000;
     public static float SPEED = MAX_ROAD/MAX_TIME;
@@ -59,6 +66,8 @@ public class FragmentMain extends Fragment implements DatabaseInfoAppListener {
     private int page;
 
     private TextView mTextCountDay, mTextViewStartDayMain;
+    private HTextView hTextView;
+    public static Typeface custom_font;
     private ImageView mImageCar;
     private FrameLayout frameLayout2;
     // Progress
@@ -71,26 +80,45 @@ public class FragmentMain extends Fragment implements DatabaseInfoAppListener {
 
     private SaveSharedPreferences saveSharedPreferences;
     private int countStartUpdate = 0;
+    private String[] sentences;
 
+    public TextView mLabel1, mLabel2;
+
+    public static InfoApp infoApp;
     // newInstance constructor for creating fragment with arguments
-    public static FragmentMain newInstance(int page, String title) {
+    public static FragmentMain newInstance(int mess, String musicPath) {
         FragmentMain fragmentMain = new FragmentMain();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        fragmentMain.setArguments(args);
         return fragmentMain;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         mTextCountDay = view.findViewById(R.id.mTextCountDay);
+        mLabel1 = view.findViewById(R.id.mLabel1);
+        mLabel2 = view.findViewById(R.id.mLabel2);
+        hTextView =view.findViewById(R.id.txtEvaporateText);
+        custom_font = Typeface.createFromAsset(getContext().getAssets(), "fonts/scripti.ttf");
+        hTextView.setTypeface(custom_font);
 
         mTextViewStartDayMain = view.findViewById(R.id.textViewStartDayMain);
         mImageCar = view.findViewById(R.id.loverCar);
         frameLayout2 = view.findViewById(R.id.frameLayout2);
+
+
+        // Set ting slide mess
+        if (infoApp != null) {
+            String mess = infoApp.getLoveText();
+            Log.i("MESS", "->> " + mess);
+            if (mess != null && !mess.trim().isEmpty()) {
+                sentences = mess.split(PATERN_SPLIT_MESS);
+                mImageCar.setOnClickListener(new ClickListener(hTextView, mLabel1, mLabel2, mTextCountDay, sentences));
+            } else {
+                Toast.makeText(getContext(), "Chua co chu", Toast.LENGTH_SHORT).show();
+            }
+        }
 
         saveSharedPreferences = new SaveSharedPreferences(getContext());
         countStartUpdate = saveSharedPreferences.getUpdateStartDayCount();
@@ -117,11 +145,9 @@ public class FragmentMain extends Fragment implements DatabaseInfoAppListener {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        page = getArguments().getInt("someInt");
-//        title = getArguments().getString("someTitle");
         // Open db
-        databaseService = new DatabaseService(getContext(), this);
-        databaseService.open();
+            databaseService = new DatabaseService(getContext(), this);
+            databaseService.open();
 
     }
 
@@ -208,22 +234,8 @@ public class FragmentMain extends Fragment implements DatabaseInfoAppListener {
 
         ObjectAnimator animation = ObjectAnimator.ofFloat(view, "translationX", roandConLai);
         animation.setDuration(timeConLai);
-//        animation.addListener(new AnimatorListenerAdapter() {
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                super.onAnimationEnd(animation);
-//                //animation.setDuration((long) MAX_TIME);
-//                //animation.start();
-//            }
-//            @Override
-//            public void onAnimationCancel(Animator animation) {
-//                view.setScaleX(0);
-//            }
-//        });
         animation.start();
 
-
-        //setAnimCar(view);
     }
     /**
      *
@@ -302,6 +314,7 @@ public class FragmentMain extends Fragment implements DatabaseInfoAppListener {
         progressDialog.dismiss();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void updPersonSuccess(String startDay) {
         if (startDay != null) {
@@ -322,15 +335,18 @@ public class FragmentMain extends Fragment implements DatabaseInfoAppListener {
     }
 
     @Override
+    public void updateInforError(String error) {
+
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
-        Log.i("MAIN_FRG","onStop()");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("MAIN_FRG","onDestroy()");
         //saveSharedPreferences.savePositionCar(mImageCar.getX());
     }
 }

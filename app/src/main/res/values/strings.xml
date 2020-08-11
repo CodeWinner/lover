@@ -19,7 +19,7 @@
     <string name="get_error">Thực hiện get thông tin không thành công!</string>
     <string name="error">Đã xảy ra lỗi!</string>
     <string name="vailidate_startday_error">Ngày sai định dạng!</string>
-
+    <string name="del_error">Thực hiện xóa thông tin không thành công!</string>
     <string name="update_success">Success!</string>
 
     <string name="loading">Loading...</string>
@@ -47,4 +47,20 @@
     <string name="mk">Ma Kết</string>
     <string name="bb">Bão Bình</string>
     <string name="sn">Song Ngư</string>
+    <string name="title_activity_time_line">TimeLineActivity</string>
+    <string name="error_validate_timeline_add">Không được để trống!</string>
+    <string name="error_validate_timeline_subject">Ban cần nhập subject!</string>
+
+    <string name="title_story">Love story</string>
+    //
+    <string name="confirm_delete_1">Chắc chắn muốn xóa?</string>
+    <string name="confirm_delete_2">Không thể lấy lại nó khi xóa</string>
+    <string name="confirm_delete_button">Có,tôi chắc!</string>
+
+    <string name="confirm_delete_ok">Xóa thành công!</string>
+    <string name="confirm_delete_ok_1">Kỷ niệm đã được xóa!</string>
+    <string name="title_activity_test_animation">TestAnimation</string>
+    <string name="title_activity_menu">MenuActivity</string>
+
+    <string name="menu_change_bg">Thay đổi hình nền app</string>
 </resources>

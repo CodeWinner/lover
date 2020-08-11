@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="30dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".main.time_line.TimeLineActivity"
+    tools:showIn="@layout/activity_time_line">
+
+    <LinearLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/textView"
+            android:fontFamily="@font/lobster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_story"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/TimeLineRecycleEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        android:layout_marginEnd="30dp"
+        android:paddingBottom="50dp"
+        android:clipToPadding="false"
+        tools:ignore="MissingConstraints"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

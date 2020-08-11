@@ -12,6 +12,15 @@
     <color name="Pi300">#f06292</color>
     <color name="Pi500">#e91e63</color>
 
+    //
+    <color name="BgLogo">#feadb9</color>
+    <color name="BgDetailMonth">#9799BA</color>
+    <color name="BgDetailMonth1">#9c8cd8</color>
+    <color name="BgTimeLine">#84b4c8</color>
+
+    <color name="PB1">#8ac0de</color>
+    <color name="PB2">#F2CF59</color>
+    <color name="PB3">#FA6e4f</color>
     // White
     <color name="white">#FFFFFF</color>
 
@@ -32,4 +41,40 @@
     <color name="deep_purple_50">#ede7f6</color>
     <color name="deep_purple_400">#7e57c2</color>
 
+    <color name="bg_menu">#eeeeee</color>
+
+    <color name="color_menu_bar">#ff9999</color>
+
+    //
+    <color name="color_select_1">#40f06292</color>
+    <color name="color_select_1_1">#80f06292</color>
+    <color name="color_select_2">#40f6a7c1</color>
+    <color name="color_select_2_1">#80f3d1dc</color>
+    <color name="color_select_3">#4038908f</color>
+    <color name="color_select_3_1">#80b2ebe0</color>
+    <color name="color_select_4">#4070ae98</color>
+    <color name="color_select_4_1">#80adddce</color>
+    <color name="color_select_5">#409c8cdb</color>
+    <color name="color_select_5_1">#80d3c0f9</color>
+    <color name="color_select_6">#40f99a9c</color>
+    <color name="color_select_6_1">#80fdbccf</color>
+    <color name="color_select_7">#40dfc7c1</color>
+    <color name="color_select_7_1">#80f4dcd6</color>
+    <color name="color_select_8">#4084b4c8</color>
+    <color name="color_select_8_1">#80b2d9ea</color>
+    <color name="color_select_9">#40619196</color>
+    <color name="color_select_9_1">#8084b4c8</color>
+    <color name="color_select_10">#40fa6e4f</color>
+    <color name="color_select_10_1">#80fb8e7e</color>
+
+    <color name="color_bar_1">#f06292</color>
+    <color name="color_bar_2">#f6a7c1</color>
+    <color name="color_bar_3">#38908f</color>
+    <color name="color_bar_4">#70ae98</color>
+    <color name="color_bar_5">#9c8cdb</color>
+    <color name="color_bar_6">#f99a9c</color>
+    <color name="color_bar_7">#dfc7c1</color>
+    <color name="color_bar_8">#84b4c8</color>
+    <color name="color_bar_9">#619196</color>
+    <color name="color_bar_10">#fa6e4f</color>
 </resources>

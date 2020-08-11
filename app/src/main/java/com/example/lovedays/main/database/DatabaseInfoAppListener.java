@@ -5,4 +5,6 @@ public interface DatabaseInfoAppListener {
     void updPersionError(String error);
 
     void getPersonError(String error);
+
+    void updateInforError(String error);
 }

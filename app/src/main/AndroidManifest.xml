@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.lovedays">
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -13,6 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents"
         tools:replace="android:icon">
+        <activity
+            android:name=".main.menu.MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/NoActionBar"></activity>
+        <activity
+            android:name=".main.time_line.TimeLineActivity"
+            android:label="@string/title_activity_time_line"
+            android:theme="@style/NoActionBar" />
+
         <service
             android:name=".common.service.CountDaysService"
             android:enabled="true"
@@ -28,7 +41,7 @@
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
             android:name=".intro.IntroActivity"
-            android:label="@string/title_activity_intro"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

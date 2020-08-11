@@ -82,6 +82,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimary"
         android:text="Update"
+        android:textAllCaps="false"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

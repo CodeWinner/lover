@@ -1,20 +1,19 @@
 package com.example.lovedays.main.database;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
-
-import com.example.lovedays.R;
-import com.example.lovedays.main.units.InfoPersonal;
 
 import static com.example.lovedays.common.LoveCommon.APP_BACKGROUND;
 import static com.example.lovedays.common.LoveCommon.APP_LOGO_IMAGE;
 import static com.example.lovedays.common.LoveCommon.APP_LOVE_TEXT;
-import static com.example.lovedays.common.LoveCommon.APP_MUSIC;
+import static com.example.lovedays.common.LoveCommon.APP_MUSIC_MESS_NAME;
+import static com.example.lovedays.common.LoveCommon.APP_MUSIC_MESS_PATH;
+import static com.example.lovedays.common.LoveCommon.APP_MUSIC_NAME;
+import static com.example.lovedays.common.LoveCommon.APP_MUSIC_PATH;
 import static com.example.lovedays.common.LoveCommon.APP_NOTIFICATION;
 import static com.example.lovedays.common.LoveCommon.APP_RATED;
 import static com.example.lovedays.common.LoveCommon.APP_START_DAY;
@@ -30,10 +29,15 @@ import static com.example.lovedays.common.LoveCommon.TABLE_INFO_APP;
 import static com.example.lovedays.common.LoveCommon.TABLE_INFO_PERSONAL_NAME;
 import static com.example.lovedays.common.LoveCommon.TABLE_TIME_LINE;
 import static com.example.lovedays.common.LoveCommon.TL_CONTENT;
+import static com.example.lovedays.common.LoveCommon.TL_COUNT_DATE;
 import static com.example.lovedays.common.LoveCommon.TL_DATE;
 import static com.example.lovedays.common.LoveCommon.TL_ID;
+import static com.example.lovedays.common.LoveCommon.TL_IMAGE_PATH_1;
+import static com.example.lovedays.common.LoveCommon.TL_IMAGE_PATH_2;
+import static com.example.lovedays.common.LoveCommon.TL_IMAGE_PATH_3;
 import static com.example.lovedays.common.LoveCommon.TL_STATUS;
 import static com.example.lovedays.common.LoveCommon.TL_SUBJECT;
+import static com.example.lovedays.common.LoveCommon.TL_TYPE;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "LoveDayManager";
@@ -48,35 +52,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createINFO_PERSONAL = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
-                TABLE_INFO_PERSONAL_NAME, PERSONAL_ID, PERSONAL_NAME,
-                PERSONAL_BIRTH_DAY, PERSONAL_SEX, PERSONAL_IMAGE,
-                PERSONAL_COLOR_BODER_CODE, PERSONAL_COLOR_TEXT);
+        try {
+            Log.i("DATA_BASE", "CREATE DB");
+            String createINFO_PERSONAL = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
+                    TABLE_INFO_PERSONAL_NAME, PERSONAL_ID, PERSONAL_NAME,
+                    PERSONAL_BIRTH_DAY, PERSONAL_SEX, PERSONAL_IMAGE,
+                    PERSONAL_COLOR_BODER_CODE, PERSONAL_COLOR_TEXT);
 
-        String createINFO_APP = String.format("CREATE TABLE %s(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
-                TABLE_INFO_APP, APP_START_DAY, APP_THEME,
-                APP_BACKGROUND, APP_LOVE_TEXT, APP_MUSIC,
-                APP_RATED, APP_NOTIFICATION, APP_LOGO_IMAGE);
+            String createINFO_APP = String.format("CREATE TABLE %s(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT,%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
+                    TABLE_INFO_APP, APP_START_DAY, APP_THEME, APP_MUSIC_NAME, APP_MUSIC_PATH,
+                    APP_BACKGROUND, APP_LOVE_TEXT, APP_MUSIC_MESS_NAME, APP_MUSIC_MESS_PATH,
+                    APP_RATED, APP_NOTIFICATION, APP_LOGO_IMAGE);
 
-        String addFirstRecord = String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s , %s, %s) VALUES('20/04/2020', %s, %s, %s, %s, %s , %s, %s)",
-                TABLE_INFO_APP, APP_START_DAY, APP_THEME,
-                APP_BACKGROUND, APP_LOVE_TEXT, APP_MUSIC,
-                APP_RATED, APP_NOTIFICATION, APP_LOGO_IMAGE,
-                null, null, null, null, null, null, null);
+            String addFirstRecord = String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s , %s, %s, %s) VALUES('20/04/2020', %s, %s, %s, %s, %s, %s, %s, %s , %s, %s)",
+                    TABLE_INFO_APP, APP_START_DAY, APP_THEME, APP_MUSIC_NAME, APP_MUSIC_PATH,
+                    APP_BACKGROUND, APP_LOVE_TEXT, APP_MUSIC_MESS_NAME, APP_MUSIC_MESS_PATH,
+                    APP_RATED, APP_NOTIFICATION, APP_LOGO_IMAGE,
+                    null, null, null, null, null, null, null, null, null, null);
 
-        String createTIME_LINE = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
-                TABLE_TIME_LINE, TL_ID, TL_DATE,
-                TL_SUBJECT, TL_CONTENT, TL_STATUS);
+            String createTIME_LINE = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
+                    TABLE_TIME_LINE, TL_ID, TL_DATE,
+                    TL_SUBJECT, TL_CONTENT, TL_STATUS, TL_TYPE,
+                    TL_IMAGE_PATH_1, TL_IMAGE_PATH_2, TL_IMAGE_PATH_3, TL_COUNT_DATE);
 
-        db.execSQL(createINFO_PERSONAL);
-        db.execSQL(createINFO_APP);
-        db.execSQL(addFirstRecord);
-        db.execSQL(createTIME_LINE);
+            db.execSQL(createINFO_PERSONAL);
+            db.execSQL(createINFO_APP);
+            db.execSQL(addFirstRecord);
+            db.execSQL(createTIME_LINE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INFO_PERSONAL_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INFO_APP);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TIME_LINE);
+        onCreate(db);
     }
 
 }

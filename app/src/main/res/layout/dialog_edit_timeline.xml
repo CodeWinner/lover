@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/blue_normal"
+    android:weightSum="10"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/txtInputSubject"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/lobster"
+        android:background="@null"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="30dp"
+        android:text="Subject"
+        android:textAlignment="center" />
+
+
+    <com.google.android.material.card.MaterialCardView
+
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="7"
+        app:cardBackgroundColor="@color/colorGrey50"
+        app:contentPaddingBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputSubject"
+        tools:layout_editor_absoluteX="10dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp">
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:id="@+id/radioCountDay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Count day"
+                    android:textColor="@color/text_color" />
+
+                <RadioButton
+                    android:id="@+id/radioSpecialDay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Special day"
+                    android:textColor="@color/text_color" />
+            </RadioGroup>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputCountDayLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:textColorHint="@color/gray_btn_bg_pressed_color"
+                app:boxStrokeColor="@color/blue_normal"
+                app:endIconTint="@color/blue_normal"
+                app:hintTextColor="@color/gray_btn_bg_pressed_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputCountDay"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input count day"
+                    android:inputType="number"
+                    android:textColor="@color/gray_btn_bg_pressed_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputSpecialDayLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:textColorHint="@color/gray_btn_bg_pressed_color"
+                app:boxStrokeColor="@color/blue_normal"
+                app:endIconTint="@color/blue_normal"
+                app:hintTextColor="@color/gray_btn_bg_pressed_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:id="@+id/inputSpecialDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input special day. Ex: 23/02/2019"
+                    android:inputType="date"
+                    android:textColor="@color/gray_btn_bg_pressed_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@color/blackTS15" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Mo ta"
+                android:textColor="@color/text_color"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="8"
+                android:background="@drawable/dashed_line"
+                android:ems="10"
+                android:fontFamily="@font/lobster"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:isScrollContainer="true"
+                android:minHeight="200dp"
+                android:outlineAmbientShadowColor="#007A1111"
+                android:scrollbars="vertical"
+                android:textColor="@color/Or500"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                app:fontFamily="@font/sofia" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mButtonUpdateDiary"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:text="Update"
+                android:textAllCaps="false"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp" />
+        </LinearLayout>
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:weightSum="3"
+        android:layout_height="0dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_gravity="center"
+            android:id="@+id/mImageHistory1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:src="@drawable/change_image"
+            app:civ_border_color="@color/Pi50"
+            app:civ_border_width="2dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_gravity="center"
+            android:id="@+id/mImageHistory2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:src="@drawable/change_image"
+            app:civ_border_color="@color/Pi50"
+            app:civ_border_width="2dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_gravity="center"
+            android:id="@+id/mImageHistory3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:src="@drawable/change_image"
+            app:civ_border_color="@color/Pi50"
+            app:civ_border_width="2dp"/>
+    </LinearLayout>
+</LinearLayout>
