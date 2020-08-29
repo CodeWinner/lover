@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/BgTimeLine"
-    tools:context=".main.time_line.TimeLineActivity">
+    tools:context="com.bacnk.lovedays.main.time_line.TimeLineActivity">
 
     <include layout="@layout/content_time_line" />
 

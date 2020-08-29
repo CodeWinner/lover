@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".intro.IntroActivity">
+    tools:context="com.bacnk.lovedays.intro.IntroActivity">
 
     <include layout="@layout/content_intro" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

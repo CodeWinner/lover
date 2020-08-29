@@ -2,7 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
+    android:id="@+id/mLayoutMenu"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -69,7 +69,11 @@
                 <include layout="@layout/card_menu_update_background"/>
                 <include layout="@layout/card_menu_update_music"/>
                 <include layout="@layout/card_menu_update_love_message"/>
+                <include layout="@layout/card_menu_ads"/>
                 <include layout="@layout/card_menu_update_color_water"/>
+                <include layout="@layout/card_menu_update_title"/>
+                <include layout="@layout/card_menu_upgrate_version"/>
+                <include layout="@layout/card_menu_rated"/>
                 <include layout="@layout/card_menu_upgrate_vip"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

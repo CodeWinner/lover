@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:hint="Ten"
+        android:hint="@string/hint_chang_profile_name"
         app:counterEnabled="true"
         app:counterMaxLength="25"
         app:layout_constraintTop_toBottomOf="@+id/mHeader"
@@ -74,7 +74,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:hint="Sinh nhat. Ex: 23/02/2019"
+        android:hint="@string/hint_example_date"
         android:importantForAutofill="yes"
         app:layout_constraintTop_toBottomOf="@+id/mTextInputNameLover1"
         tools:ignore="MissingConstraints"
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
             android:layout_weight="1"
-            android:text="Nam" />
+            android:text="@string/radio_sex_man" />
 
         <RadioButton
             android:id="@+id/mRadioButtonWomen"
@@ -115,14 +115,14 @@
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
             android:layout_weight="1"
-            android:text="Nu" />
+            android:text="@string/radio_sex_woman" />
         <RadioButton
             android:id="@+id/mRadioButtonLBGT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
             android:layout_weight="1"
-            android:text="LGBT" />
+            android:text="@string/radio_sex_lgbt" />
 
     </RadioGroup>
 

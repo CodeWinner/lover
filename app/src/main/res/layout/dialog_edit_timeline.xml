@@ -63,7 +63,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Count day"
+                    android:text="@string/radio_count_day"
                     android:textColor="@color/text_color" />
 
                 <RadioButton
@@ -71,7 +71,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Special day"
+                    android:text="@string/radio_special_day"
                     android:textColor="@color/text_color" />
             </RadioGroup>
             </LinearLayout>
@@ -117,7 +117,7 @@
                     android:id="@+id/inputSpecialDay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Input special day. Ex: 23/02/2019"
+                    android:hint="@string/hint_input_specidale_day"
                     android:inputType="date"
                     android:textColor="@color/gray_btn_bg_pressed_color" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:text="Mo ta"
+                android:text="@string/title_desp_change_profile"
                 android:textColor="@color/text_color"
                 android:textSize="12sp" />
 

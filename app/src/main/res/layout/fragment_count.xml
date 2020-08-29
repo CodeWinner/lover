@@ -125,7 +125,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="2dp"
-                    android:text="Năm"
+                    android:text="@string/year_display"
                     android:textAlignment="center"
                     android:textColor="@color/blackTS15"
                     android:textSize="12sp" />
@@ -164,7 +164,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="2dp"
-                    android:text="Tháng"
+                    android:text="@string/month_display"
                     android:textAlignment="center"
                     android:textColor="@color/blackTS15"
                     android:textSize="12sp" />
@@ -203,7 +203,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="2dp"
-                    android:text="Tuần"
+                    android:text="@string/week_display"
                     android:textAlignment="center"
                     android:textColor="@color/blackTS15"
                     android:textSize="12sp" />
@@ -242,7 +242,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="2dp"
-                    android:text="Ngày"
+                    android:text="@string/day_display"
                     android:textAlignment="center"
                     android:textColor="@color/blackTS15"
                     android:textSize="12sp" />

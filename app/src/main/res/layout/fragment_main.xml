@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/annie_use_your_telescope"
-            android:text="Đã yêu"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="50sp" />
@@ -49,7 +48,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/annie_use_your_telescope"
-            android:text="Ngày"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="50sp" />

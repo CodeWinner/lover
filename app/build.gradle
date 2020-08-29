@@ -1,22 +1,26 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.lovedays"
-        minSdkVersion 17
+        applicationId "com.bacnk.lovedays"
+        minSdkVersion 26
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 13
+        versionName "1.1.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     flavorDimensions "default"
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true // Thu gọn code, false nếu không dùng
+            useProguard true //Làm rối code
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -38,22 +42,20 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation project(':nativetemplates')
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'me.relex:circleindicator:2.1.4'
     implementation 'com.gelitenight.waveview:waveview:1.0.0'
     implementation 'com.github.Q42:AndroidScrollingImageView:1.3.3'
-    implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
     implementation 'com.github.vipulasri:timelineview:1.1.4'
-    implementation 'com.github.f0ris.sweetalert:library:1.5.1'
     implementation 'com.github.yalantis:ucrop:2.2.4-native'
     implementation 'com.github.GrenderG:Toasty:1.4.2'
     //noinspection GradleCompatible
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     // circle image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'me.relex:circleindicator:1.3.2'
     implementation 'jp.wasabeef:blurry:3.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
@@ -79,5 +81,18 @@ dependencies {
     implementation 'nl.dionsegijn:konfetti:1.2.2'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
     implementation 'com.github.elevenetc:textsurface:0.9.1'
+    implementation 'org.jsoup:jsoup:1.8.3'
+
+    // Add the SDK for Firebase Cloud Messaging
+    // Add the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+
+    implementation 'com.github.amlcurran.showcaseview:library:5.4.3'
+    implementation 'com.google.android.gms:play-services-ads:19.3.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'com.google.android.play:core:1.7.3'
 
 }

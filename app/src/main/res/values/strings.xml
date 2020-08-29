@@ -1,66 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LoveDays</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_activity_intro">IntroActivity</string>
-    <string name="title_activity_main_info">MainInfoActivity</string>
-    <string name="title_activity_start">StartActivity</string>
-    <string name="title_fragment_count">Chúng ta đã bên nhau...</string>
-    // 1
-    <string name="app_logo">Love days</string>
-    <string name="app_decript">Ứng dụng số #1 dành cho các cặp đôi</string>
-    // 2
-    <string name="lover1">Hùng Dũng</string>
-    <string name="lover2">Bích Phương</string>
-    <string name="label_cancel">Cancel</string>
-    <string name="label_ok">OK</string>
-    // Error
-    // Exeption
-    <string name="update_error">Error!</string>
-    <string name="get_error">Thực hiện get thông tin không thành công!</string>
-    <string name="error">Đã xảy ra lỗi!</string>
-    <string name="vailidate_startday_error">Ngày sai định dạng!</string>
-    <string name="del_error">Thực hiện xóa thông tin không thành công!</string>
-    <string name="update_success">Success!</string>
+    <string name="id_app_admod" translatable="false">ca-app-pub-6720811027803589~1823025081</string>
+    <string name="id_admod_baner" translatable="false">ca-app-pub-6720811027803589/9529484088</string> // ca-app-pub-6720811027803589/9529484088
+    <string name="id_admod_full" translatable="false">ca-app-pub-6720811027803589/6137033982</string> // ca-app-pub-6720811027803589/6137033982
+    <string name="id_admod_xenke" translatable="false">ca-app-pub-6720811027803589/3958233833</string> // ca-app-pub-6720811027803589/3958233833
 
-    <string name="loading">Loading...</string>
+    <string name="test_id_admod_baner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="test_id_admod_full" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="test_id_admod_xenke" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
 
+
+    <string name="default_notification_channel_id" translatable="false">id_default_mess_firebase</string>
+    <string name="title_activity_menu" translatable="false">MenuActivity</string>
+    <string name="title_activity_main_info" translatable="false">MainInfoActivity</string>
+    <string name="title_activity_time_line" translatable="false">TimeLineActivity</string>
+    <string name="title_story" translatable="false">Love story</string>
+    <string name="title_activity_test_animation" translatable="false">TestAnimation</string>
+    <string name="radio_sex_lgbt" translatable="false">LGBT</string>
+    <string name="title_activity_main2" translatable="false">Main2Activity</string>
+    <string name="title_activity_intro" translatable="false">IntroActivity</string>
+    <string name="title_activity_start" translatable="false">StartActivity</string>
+    <string name="app_logo" translatable="false">Love days</string>
+    <string name="label_cancel" translatable="false">Cancel</string>
+    <string name="label_ok" translatable="false">OK</string>
+    <string name="update_error" translatable="false">Error!</string>
+    <string name="update_success" translatable="false">Success!</string>
+    <string name="loading" translatable="false">Loading...</string>
+    <string name="app_name" translatable="false">Love Days</string>
     // Quyen truy cap
-    <string name="permission_title_rationale">Permission needed</string>
-    <string name="format_crop_result_d_d">Crop success</string>
-
+    <string name="permission_title_rationale" translatable="false">Permission needed</string>
+    <string name="format_crop_result_d_d" translatable="false">Crop success</string>
     //Crop image
-    <string name="toast_cannot_retrieve_selected_image">Cannot retrieve selected image</string>
-    <string name="toast_cannot_retrieve_cropped_image">Cannot retrieve cropped image</string>
-    <string name="toast_unexpected_error">Unexpected error</string>
-    <string name="label_select_picture">Select Picture</string>
+    <string name="toast_cannot_retrieve_selected_image" translatable="false">Cannot retrieve selected image</string>
+    <string name="toast_cannot_retrieve_cropped_image" translatable="false">Cannot retrieve cropped image</string>
+    <string name="toast_unexpected_error" translatable="false">Unexpected error</string>
+    <string name="label_select_picture" translatable="false">Select Picture</string>
+    <string name="chip_update_ver" translatable="false">Update</string>
 
-    //CHD
-    <string name="bd">Bạch Dương</string>
-    <string name="kn">Kim Ngưu</string>
-    <string name="st">Song Tử</string>
-    <string name="cg">Cự Giải</string>
-    <string name="sutu">Sư Tử</string>
-    <string name="xn">Xử Nữ</string>
-    <string name="tb">Thiên Bình</string>
-    <string name="bc">Bọ Cạp</string>
-    <string name="nm">Nhân Mã</string>
-    <string name="mk">Ma Kết</string>
-    <string name="bb">Bão Bình</string>
-    <string name="sn">Song Ngư</string>
-    <string name="title_activity_time_line">TimeLineActivity</string>
-    <string name="error_validate_timeline_add">Không được để trống!</string>
-    <string name="error_validate_timeline_subject">Ban cần nhập subject!</string>
-
-    <string name="title_story">Love story</string>
-    //
-    <string name="confirm_delete_1">Chắc chắn muốn xóa?</string>
-    <string name="confirm_delete_2">Không thể lấy lại nó khi xóa</string>
-    <string name="confirm_delete_button">Có,tôi chắc!</string>
-
-    <string name="confirm_delete_ok">Xóa thành công!</string>
-    <string name="confirm_delete_ok_1">Kỷ niệm đã được xóa!</string>
-    <string name="title_activity_test_animation">TestAnimation</string>
-    <string name="title_activity_menu">MenuActivity</string>
-
-    <string name="menu_change_bg">Thay đổi hình nền app</string>
+    <string name="app_decript">The # 1 app for couples</string>
+    <string name="bb">Aquarius</string>
+    <string name="bc">Scorpio</string>
+    <string name="bd">Aries</string>
+    <string name="button_delete_timeline">Delete</string>
+    <string name="button_edit_timeline">Edit</string>
+    <string name="cg">Cancer</string>
+    <string name="chip_change_bg">Change</string>
+    <string name="chip_change_music_love">Change sound</string>
+    <string name="chip_rate">Rate!</string>
+    <string name="chip_upgrate_vip">Upgrate</string>
+    <string name="confirm_delete_1">Are you sure to delete?</string>
+    <string name="confirm_delete_2">It can\'t retrieved when delete !</string>
+    <string name="confirm_delete_button">Yes, I\'m sure!</string>
+    <string name="confirm_delete_ok">Deleted successfully!</string>
+    <string name="confirm_delete_ok_1">Memories have been deleted!</string>
+    <string name="cung_hoang_dao_default">Cancer</string>
+    <string name="day_display">Day</string>
+    <string name="default_birday">Birthday of</string>
+    <string name="default_content_birday">This present is not valuable itself, but it is a souvenir hereto, it brings all most my warm sentiment. Happy birthday to you.</string>
+    <string name="del_error">Delete fail!</string>
+    <string name="double_click_back">Touch again to exit.</string>
+    <string name="error">Error! An error occurred. Please try again later</string>
+    <string name="error_validate_timeline_add">Do not leave blank!</string>
+    <string name="error_validate_timeline_subject">You need to enter subject!</string>
+    <string name="get_error">Failed to get the information!</string>
+    <string name="hint_chang_profile_name">Display name</string>
+    <string name="hint_example_date">Birthday. Ex: 23/02/2019</string>
+    <string name="hint_example_date_start_love">Falling in love. Ex: 23/02/2019</string>
+    <string name="hint_input_count_day">Enter the number of days.</string>
+    <string name="hint_input_specidale_day">Enter a specific date.. Ex: 23/02/2019.</string>
+    <string name="kn">Taurus</string>
+    <string name="love_text_default">Send words of love:\nGo to settings \nTo edit this content\nAnd give your sweetheart\nwords of love.</string>
+    <string name="lover1">You</string>
+    <string name="lover2">Me</string>
+    <string name="menu_change_bg">Change the app wallpaper</string>
+    <string name="menu_change_title">Change title</string>
+    <string name="menu_desp_card_love_mess">Give your lover a surprise. The things you always wanted to text. What\'s more wonderful, when your lover receives sincere words From the bottom of your heart.</string>
+    <string name="menu_desp_music_bg">Choose your favorite music to play when the app is open.\nBy clicking on the music icon on the right.</string>
+    <string name="menu_desp_music_love_mess">Music helps your messages convey a stronger emotion.</string>
+    <string name="menu_desp_rate">Send feedback to help us improve the app better. All your reviews are of great help to us. Thank you!</string>
+    <string name="menu_desp_update_vip">Upgrade to vip version to remove ads.</string>
+    <string name="menu_title_card_love_mess">Sending love message.</string>
+    <string name="menu_title_music_bg">Soundtrack</string>
+    <string name="menu_title_music_love_mess">Change music</string>
+    <string name="menu_title_rate">Send feedback.</string>
+    <string name="menu_title_update_vip">VIP upgrade</string>
+    <string name="menu_title_update_ver">Update new version.</string>
+    <string name="menu_desp_update_ver_yes">Please check to the latest version</string>
+    <string name="menu_upgrate_vip_content">Features are under development!</string>
+    <string name="mk">Capricorn</string>
+    <string name="month_display">Month</string>
+    <string name="nm">Sagittarius</string>
+    <string name="radio_count_day">Count day</string>
+    <string name="radio_sex_man">Man</string>
+    <string name="radio_sex_woman">Woman</string>
+    <string name="radio_special_day">The exact day</string>
+    <string name="rating_button_no">No.</string>
+    <string name="rating_button_yes">Yes, great!</string>
+    <string name="rating_question">Are you satisfied with the application?</string>
+    <string name="rating_question_1">If so, please encourage by voting for this cute app ^^</string>
+    <string name="show_case_love_mess">Click here to give your spouse a surprise.</string>
+    <string name="show_case_start_date">Click here to change the date of love.</string>
+    <string name="sn">Pisces</string>
+    <string name="st">Gemini</string>
+    <string name="sutu">Leo</string>
+    <string name="tb">Libra</string>
+    <string name="title_bottom_display">Day</string>
+    <string name="title_card_menu_color">Change the water color of love.</string>
+    <string name="title_desp_change_profile">Description.</string>
+    <string name="title_fragment_count">We were together ...</string>
+    <string name="title_top_display">Falling love</string>
+    <string name="upgrate_version">Latest version upgrade!</string>
+    <string name="upgrate_version_1">Currently there is the latest upgrade version. Please update the application to be able to use.</string>
+    <string name="vailidate_startday_error">Wrong date format!</string>
+    <string name="week_display">Week</string>
+    <string name="xn">Virgo</string>
+    <string name="year_display">Year</string>
+    <string name="vailidate_image_error">You need add image profile !</string>
 </resources>

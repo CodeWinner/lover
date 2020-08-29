@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_fragment_count">Chúng ta đã bên nhau...</string>
+    // 1
+    <string name="app_decript">Ứng dụng số #1 dành cho các cặp đôi</string>
+    // 2
+    <string name="lover1">Anh</string>
+    <string name="lover2">Em</string>
+    // Error
+    // Exeption
+    <string name="get_error">Thực hiện get thông tin không thành công!</string>
+    <string name="error">Đã xảy ra lỗi!</string>
+    <string name="vailidate_startday_error">Ngày sai định dạng!</string>
+    <string name="del_error">Thực hiện xóa thông tin không thành công!</string>
+    //CHD
+    <string name="bd">Bạch Dương</string>
+    <string name="kn">Kim Ngưu</string>
+    <string name="st">Song Tử</string>
+    <string name="cg">Cự Giải</string>
+    <string name="sutu">Sư Tử</string>
+    <string name="xn">Xử Nữ</string>
+    <string name="tb">Thiên Bình</string>
+    <string name="bc">Bọ Cạp</string>
+    <string name="nm">Nhân Mã</string>
+    <string name="mk">Ma Kết</string>
+    <string name="bb">Bão Bình</string>
+    <string name="sn">Song Ngư</string>
+    <string name="error_validate_timeline_add">Không được để trống!</string>
+    <string name="error_validate_timeline_subject">Ban cần nhập subject!</string>
+
+    <string name="default_birday">Sinh nhật của </string>
+    <string name="default_content_birday">Được cùng nhau đón sinh nhật là một điều hạnh phúc , vô cùng lớn.</string>
+
+    //
+    <string name="confirm_delete_1">Chắc chắn muốn xóa?</string>
+    <string name="confirm_delete_2">Không thể lấy lại nó khi xóa!</string>
+    <string name="confirm_delete_button">Có,tôi chắc!</string>
+
+    <string name="confirm_delete_ok">Xóa thành công!</string>
+    <string name="confirm_delete_ok_1">Kỷ niệm đã được xóa!</string>
+
+    <string name="menu_change_bg">Thay đổi hình nền app</string>
+    <string name="menu_change_title">Thay đổi title</string>
+
+    <string name="title_top_display">Đã yêu</string>
+    <string name="title_bottom_display">Ngày</string>
+
+    <string name="double_click_back">Chạm lại để thoát.</string>
+    <string name="love_text_default">Gửi lời yêu thương:\nVào cài đặt\nĐể chỉnh sửa nội dung này \nVà tặng đến người yêu bạn \nNhững lời yêu thương\nNgọt ngào nhất.</string>
+
+    <string name="chip_change_bg">Chọn ảnh</string>
+    <string name="title_card_menu_color">Thay đổi màu nước tình yêu.</string>
+    <string name="menu_title_card_love_mess">Gửi lời yêu thương.</string>
+    <string name="menu_title_music_love_mess">Thay đổi nhạc</string>
+    <string name="menu_desp_music_love_mess">Âm nhạc sẽ giúp những lời nhắn gửi của bạn truyền được cảm xúc mãnh liệt hơn.</string>
+    <string name="chip_change_music_love">Chọn nhạc</string>
+    <string name="menu_title_music_bg">Nhạc nền</string>
+    <string name="menu_desp_music_bg">Chọn bản nhạc bạn yêu thích để phát khi app mở.\nBằng cách click vào icon âm nhạc bên phải.</string>
+    <string name="menu_title_update_vip">Nâng cấp VIP</string>
+    <string name="menu_desp_update_vip">Nâng lên phiên bản vip để loại bỏ quảng cáo.</string>
+    <string name="chip_upgrate_vip">Nâng cấp</string>
+
+    <string name="cung_hoang_dao_default">Cự giải</string>
+
+    <string name="hint_chang_profile_name">Tên hiển thị</string>
+    <string name="hint_example_date">Sinh nhat. Ex: 23/02/2019</string>
+    <string name="hint_example_date_start_love">Bắt đầu yêu. Ex: 23/02/2019</string>
+
+    <string name="radio_sex_man">Nam</string>
+    <string name="radio_sex_woman">Nữ</string>
+
+    <string name="hint_input_count_day">Nhập vào số ngày.</string>
+    <string name="hint_input_specidale_day">Nhập ngày cụ thể. Ex: 23/02/2019.</string>
+    <string name="radio_count_day">Số ngày</string>
+    <string name="radio_special_day">Ngày cụ thể</string>
+    <string name="menu_desp_update_ver_yes">Kiểm tra version mới nhất.</string>
+    <string name="title_desp_change_profile">Mô tả.</string>
+    <string name="button_edit_timeline">Chỉnh sửa</string>
+    <string name="button_delete_timeline">Xóa</string>
+    <string name="menu_title_update_ver">Cập nhật phiên bản mới nhất.</string>
+    <string name="year_display">Năm</string>
+    <string name="month_display">Tháng</string>
+    <string name="week_display">Tuần</string>
+    <string name="day_display">Ngày</string>
+
+    <string name="show_case_start_date">Chọn vào đây để thay đổi ngày bắt đầu yêu.</string>
+    <string name="show_case_love_mess">Chọn vào đây để cho nửa kia của bạn một điều bất ngờ.</string>
+
+    <string name="rating_question">Bạn có thấy hài lòng với ứng dụng không ?</string>
+    <string name="rating_question_1">Nếu có hãy khích lệ bằng cách vote cho ứng dụng dễ thương này nhé ^.^</string>
+    <string name="rating_button_no">Không</string>
+    <string name="rating_button_yes">Có, tuyệt vời!</string>
+    <string name="upgrate_version">Nâng cấp phiên bản mới nhất !</string>
+    <string name="upgrate_version_1">Hiện tại đang có phiên bản nâng cấp mới nhất. Hãy cập nhật ứng dụng để có thể sử dụng.Những tính năng mới nhất.</string>
+    <string name="menu_title_rate">Gửi phản hồi.</string>
+    <string name="menu_desp_rate">Gửi phản hồi giúp chúng tôi hoàn thiện ứng dụng một cách tốt hơn. Mọi đánh giá của bạn là sự giúp đỡ vô cùng lớn đối với chúng tôi. Xin cám ơn !</string>
+    <string name="chip_rate">Đánh giá</string>
+    <string name="vailidate_image_error">Bạn cần thêm ảnh hiển thị !</string>
+    <string name="menu_upgrate_vip_content">Tính năng đang được phát triển!</string>
+    <string name="menu_desp_card_love_mess">Hãy gửi đến người yêu của bạn một sự bất ngờ. Những điều mà bạn luôn muốn nhắn gửi. Còn gì tuyệt vời hơn, khi người yêu mình nhận được những lời thật lòng Từ tận đáy lòng của bạn.</string>
+</resources>

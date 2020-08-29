@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/Pi50"
-        android:text="Edit"
+        android:text="@string/button_edit_timeline"
         android:textAllCaps="false"
         android:textColor="@color/text_color"
         app:backgroundTint="@color/white" />
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/Pi50"
-        android:text="Delete"
+        android:text="@string/button_delete_timeline"
         android:textAllCaps="false"
         android:textColor="@color/red_btn_bg_color"
         app:backgroundTint="@color/Pi50" />
