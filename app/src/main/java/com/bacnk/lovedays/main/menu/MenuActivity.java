@@ -140,7 +140,7 @@ public class MenuActivity extends AppCompatActivity implements DatabaseInfoAppLi
     private TextInputEditText mEditNameTitleBottom, mEditNameTitleTop;
 
     // View version
-    private TextView txtDespVersion;
+    private TextView txtOldVersion;
     private Chip btnUpgrateVersion;
 
     private UCropFragment fragment;
@@ -187,7 +187,6 @@ public class MenuActivity extends AppCompatActivity implements DatabaseInfoAppLi
 
         initView();
 
-
         // Ads
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAdBack = new InterstitialAd(this);
@@ -217,9 +216,6 @@ public class MenuActivity extends AppCompatActivity implements DatabaseInfoAppLi
                 .build();
 
         adLoader.loadAd(new AdRequest.Builder().build());
-
-
-
 
         if (!mInterstitialAdBack.isLoading() && !mInterstitialAdBack.isLoaded()) {
             AdRequest adRequest = new AdRequest.Builder().build();
@@ -490,7 +486,14 @@ public class MenuActivity extends AppCompatActivity implements DatabaseInfoAppLi
             @Override
             public void performClick(View v) {
                 firebaseAnalysClick("upgrate_vip", "menu");
-                Toast.makeText(getApplicationContext(), getString(R.string.menu_upgrate_vip_content), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), getString(R.string.menu_upgrate_vip_content), Toast.LENGTH_SHORT).show();
+                Uri uri = Uri.parse("market://details?id=com.bacnk.lovedaysvip");
+                Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                try {
+                    startActivity(myAppLinkToMarket);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(MenuActivity.this, "Unable to find market app", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -618,7 +621,7 @@ public class MenuActivity extends AppCompatActivity implements DatabaseInfoAppLi
         mEditNameTitleTop = findViewById(R.id.mEditNameTitleTop);
         btnRate = findViewById(R.id.btnRate);
         btnUpgrateVip = findViewById(R.id.btnUpgrateVip);
-        txtDespVersion = findViewById(R.id.txtDespVersion);
+        txtOldVersion = findViewById(R.id.txtOldVersion);
         btnUpgrateVersion = findViewById(R.id.btnUpgrateVersion);
 
         colorSelect1 = findViewById(R.id.colorSelect1);
@@ -643,6 +646,12 @@ public class MenuActivity extends AppCompatActivity implements DatabaseInfoAppLi
      * Set ting display
      */
     private void settingDisplay() {
+
+        try {
+            txtOldVersion.setText(getString(R.string.menu_desp_old_ver) + " " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
         isMusicBGChecked = saveSharedPreferences.isMusicBackgroundOnOff();
         switchOnOffSound.setChecked(isMusicBGChecked);

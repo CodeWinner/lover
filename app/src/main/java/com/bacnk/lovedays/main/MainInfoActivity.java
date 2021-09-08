@@ -6,6 +6,7 @@ import android.animation.PropertyValuesHolder;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -43,7 +44,6 @@ import com.bacnk.lovedays.main.database.DatabaseLoverOnListener;
 import com.bacnk.lovedays.main.helper.ProgressGenerator;
 import com.bacnk.lovedays.main.helper.WaveHelper;
 import com.bacnk.lovedays.main.menu.MenuActivity;
-import com.bacnk.lovedays.main.time_line.TimeLineActivity;
 import com.bacnk.lovedays.main.units.InfoApp;
 import com.bacnk.lovedays.main.units.InfoPersonal;
 import com.bacnk.lovedays.main.units.TimeLine;
@@ -65,8 +65,13 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.InstallStatus;
+import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.yalantis.ucrop.UCrop;
@@ -104,7 +109,6 @@ import static com.bacnk.lovedays.common.LoveCommon.BACH_DUONG;
 import static com.bacnk.lovedays.common.LoveCommon.BAO_BINH;
 import static com.bacnk.lovedays.common.LoveCommon.BO_CAP;
 import static com.bacnk.lovedays.common.LoveCommon.CU_GIAI;
-import static com.bacnk.lovedays.common.LoveCommon.DISPLAY_ADS;
 import static com.bacnk.lovedays.common.LoveCommon.KEY_THEME_COLOR_1;
 import static com.bacnk.lovedays.common.LoveCommon.KEY_THEME_COLOR_10;
 import static com.bacnk.lovedays.common.LoveCommon.KEY_THEME_COLOR_2;
@@ -145,6 +149,7 @@ public class MainInfoActivity extends BaseActivity implements
     private static final String EXTENDTION_PNG = ".png";
     private static final int REQUEST_SELECT_PICTURE = 0x01;
     private static final int REQUEST_SELECT_PICTURE_FOR_FRAGMENT = 0x02;
+    private static final int IMMEDIATE_APP_UPDATE_REQ_CODE = 123;
 
     private int requestMode = BuildConfig.RequestMode;
 
@@ -174,7 +179,7 @@ public class MainInfoActivity extends BaseActivity implements
     private TextView mOldLover1, mOldLover2;
     private TextView mNameCHDLover1, mNameCHDLover2;
     private ImageView mImageCHDLover1, mImageCHDLover2;
-    private KonfettiView konfettiView;
+    public static KonfettiView konfettiView;
     private ImageButton ibtMenu;
     //==================================================================
     // Values
@@ -231,8 +236,8 @@ public class MainInfoActivity extends BaseActivity implements
     private int CLICK_LOVER = 1;
     private InterstitialAd mInterstitialAd;
 
+    private AppUpdateManager appUpdateManager;
     private InstallStateUpdatedListener installStateUpdatedListener;
-    private AppUpdateManager mAppUpdateManager;
     private static final int RC_APP_UPDATE = 11;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -264,7 +269,6 @@ public class MainInfoActivity extends BaseActivity implements
 
             @Override
             public void onAdClosed() {
-                DISPLAY_ADS = false;
                 if (!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded()) {
                     AdRequest adRequest = new AdRequest.Builder().build();
                     mInterstitialAd.loadAd(adRequest);
@@ -272,6 +276,15 @@ public class MainInfoActivity extends BaseActivity implements
 
             }
         });
+
+        appUpdateManager = AppUpdateManagerFactory.create(getApplicationContext());
+        checkUpdate();
+        installStateUpdatedListener = state -> {
+            if (state.installStatus() == InstallStatus.INSTALLED) {
+                removeInstallStateUpdateListener();
+            }
+        };
+        appUpdateManager.registerListener(installStateUpdatedListener);
 
         // Start sound background
         //start service and play music
@@ -299,14 +312,6 @@ public class MainInfoActivity extends BaseActivity implements
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                if (DISPLAY_ADS == true) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            showInterstitial();
-                        }
-                    }, 2000);
-                }
             }
         });
 
@@ -358,7 +363,7 @@ public class MainInfoActivity extends BaseActivity implements
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (!task.isSuccessful()) {
-                        firebaseAnalysClick(Locale.getDefault().getLanguage(), "language_regist_topic");
+                        firebaseAnalysClick("LANGUAGE_"+Locale.getDefault().getLanguage(), "language_regist_topic");
                         saveSharedPreferences.saveTopicMess(Locale.getDefault().getLanguage());
                     }
 
@@ -373,7 +378,30 @@ public class MainInfoActivity extends BaseActivity implements
     }
 
 
+    private void checkUpdate() {
 
+        com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                startUpdateFlow(appUpdateInfo);
+            }
+        });
+    }
+
+    private void startUpdateFlow(AppUpdateInfo appUpdateInfo) {
+        try {
+            appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, IMMEDIATE_APP_UPDATE_REQ_CODE);
+        } catch (IntentSender.SendIntentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void removeInstallStateUpdateListener() {
+        if (appUpdateManager != null) {
+            appUpdateManager.unregisterListener(installStateUpdatedListener);
+        }
+    }
 
     /**
      * show ad
@@ -743,9 +771,12 @@ public class MainInfoActivity extends BaseActivity implements
         mButtonRatingNo.setOnClickListener(new SingleClickListener() {
             @Override
             public void performClick(View v) {
-                rateApp();
-
-                saveSharedPreferences.saveRated(true);
+                //
+                firebaseAnalysClick("DISPLAY_RATE_NO","DISPLAY_RATE_NO");
+                dialogUpdateLocer.cancel();
+                saveSharedPreferences.saveRated(false);
+                stopService(new Intent(MainInfoActivity.this, SoundService.class));
+                finish();
             }
         });
 
@@ -753,7 +784,7 @@ public class MainInfoActivity extends BaseActivity implements
             @Override
             public void performClick(View v) {
                 rateApp();
-
+                firebaseAnalysClick("DISPLAY_RATE_YES","DISPLAY_RATE_YES");
                 saveSharedPreferences.saveRated(true);
             }
         });
@@ -1249,9 +1280,17 @@ public class MainInfoActivity extends BaseActivity implements
             } else if (requestCode == UCrop.REQUEST_CROP) {
                 handleCropResult(data);
             }
-        }
-        if (resultCode == UCrop.RESULT_ERROR) {
+        } else if (resultCode == UCrop.RESULT_ERROR) {
             handleCropError(data);
+        }  else if (requestCode == IMMEDIATE_APP_UPDATE_REQ_CODE) {
+            if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(getApplicationContext(), "Update canceled by user!", Toast.LENGTH_LONG).show();
+            } else if (resultCode == RESULT_OK) {
+                Toast.makeText(getApplicationContext(),"Update success!", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Update Failed!", Toast.LENGTH_LONG).show();
+                checkUpdate();
+            }
         }
     }
 

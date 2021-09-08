@@ -9,13 +9,21 @@
     tools:context="com.bacnk.lovedays.main.time_line.TimeLineActivity"
     tools:showIn="@layout/activity_time_line">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
         tools:ignore="MissingConstraints">
 
+        <ImageButton
+            android:layout_marginLeft="5dp"
+            android:id="@+id/btnBackStory"
+            android:background="@null"
+            android:src="?attr/homeAsUpIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ImageButton>
         <TextView
             android:id="@+id/textView"
             android:fontFamily="@font/lobster"
@@ -26,7 +34,7 @@
             android:textSize="20sp"
             android:textAlignment="center" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/TimeLineRecycleEdit"

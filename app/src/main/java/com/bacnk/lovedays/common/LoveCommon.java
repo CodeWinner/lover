@@ -102,6 +102,4 @@ public class LoveCommon {
     public static boolean INTRO_ACTIVITY = false;
     public static boolean MAIN_ACTIVITY = false;
     public static boolean TIMELINE_ACTIVITY = false;
-
-    public static boolean DISPLAY_ADS = false;
 }

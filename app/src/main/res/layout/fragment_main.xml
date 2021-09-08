@@ -90,8 +90,7 @@
             android:id="@+id/loverCar"
             android:layout_width="60dp"
             android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            android:layout_marginRight="100dp"
+            android:layout_gravity="bottom|center"
             android:src="@drawable/lovecar" />
 
     </FrameLayout>

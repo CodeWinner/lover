@@ -52,6 +52,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -91,6 +92,8 @@ public class TimeLineActivity extends AppCompatActivity implements DatabaseTimel
     private AlertDialog dialogEditTimeLine;
     private AlertDialog dialogMenuTimeLine;
 
+    private ImageButton btnBackStory;
+
     // 1 : then count day, 2: then special day
     private static int typeDayFlg = MODE_COUNT_DAY;
 
@@ -125,6 +128,7 @@ public class TimeLineActivity extends AppCompatActivity implements DatabaseTimel
         setContentView(R.layout.activity_time_line);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        btnBackStory = findViewById(R.id.btnBackStory);
 
         MENU_ACTIVITY = false;
         INTRO_ACTIVITY = false;
@@ -248,8 +252,13 @@ public class TimeLineActivity extends AppCompatActivity implements DatabaseTimel
 
         mFirebaseAnalytics.setCurrentScreen(this, this.getLocalClassName(), null /* class override */);
 
+        btnBackStory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showInterstitial();
+            }
+        });
     }
-
 
     /**
      * Show ads full

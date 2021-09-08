@@ -5,9 +5,9 @@
     <string name="id_admod_full" translatable="false">ca-app-pub-6720811027803589/6137033982</string> // ca-app-pub-6720811027803589/6137033982
     <string name="id_admod_xenke" translatable="false">ca-app-pub-6720811027803589/3958233833</string> // ca-app-pub-6720811027803589/3958233833
 
-    <string name="test_id_admod_baner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="test_id_admod_full" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="test_id_admod_xenke" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+<!--    <string name="id_admod_baner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>-->
+<!--    <string name="id_admod_full" translatable="false">ca-app-pub-3940256099942544/1033173712</string>-->
+<!--    <string name="id_admod_xenke" translatable="false">ca-app-pub-3940256099942544/2247696110</string>-->
 
 
     <string name="default_notification_channel_id" translatable="false">id_default_mess_firebase</string>
@@ -86,6 +86,7 @@
     <string name="menu_title_update_vip">VIP upgrade</string>
     <string name="menu_title_update_ver">Update new version.</string>
     <string name="menu_desp_update_ver_yes">Please check to the latest version</string>
+    <string name="menu_desp_old_ver">App version :</string>
     <string name="menu_upgrate_vip_content">Features are under development!</string>
     <string name="mk">Capricorn</string>
     <string name="month_display">Month</string>

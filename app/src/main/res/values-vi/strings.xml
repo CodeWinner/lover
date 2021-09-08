@@ -74,6 +74,7 @@
     <string name="radio_count_day">Số ngày</string>
     <string name="radio_special_day">Ngày cụ thể</string>
     <string name="menu_desp_update_ver_yes">Kiểm tra version mới nhất.</string>
+    <string name="menu_desp_old_ver">Phiên bản ứng ụng :</string>
     <string name="title_desp_change_profile">Mô tả.</string>
     <string name="button_edit_timeline">Chỉnh sửa</string>
     <string name="button_delete_timeline">Xóa</string>

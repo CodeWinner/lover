@@ -29,12 +29,12 @@
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/txtDespVersion"
+            android:id="@+id/txtOldVersion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
-            android:text="@string/menu_desp_update_ver_yes"
+            android:text="@string/menu_desp_old_ver"
             android:textColor="@color/xam"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"

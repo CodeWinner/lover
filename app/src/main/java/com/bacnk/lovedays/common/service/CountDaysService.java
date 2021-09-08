@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -14,7 +13,6 @@ import com.bacnk.lovedays.common.DateUnitCommon;
 import com.bacnk.lovedays.main.database.DatabaseService;
 
 import static com.bacnk.lovedays.common.DateUtils.getTimeBetween;
-import static com.bacnk.lovedays.common.LoveCommon.DISPLAY_ADS;
 import static com.bacnk.lovedays.common.LoveCommon.GOOD_AFTERNOON;
 import static com.bacnk.lovedays.common.LoveCommon.GOOD_MORNING;
 
@@ -70,12 +68,6 @@ public class CountDaysService extends Service {
                         count ++;
                         countMorning ++;
 
-                        if (DISPLAY_ADS == false && countAs > 40) {
-                            countAs = 0;
-                        }
-                        if (countAs == 40) {
-                            DISPLAY_ADS = true;
-                        }
                         if (count == 40) {
                             strDay = databaseService.getStartDay();
                             count = 0;

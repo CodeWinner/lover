@@ -18,16 +18,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" >
-
-            <ImageButton
-
+            <LinearLayout
+                android:padding="2dp"
+                android:background="@color/blackTS15"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
-                android:id="@+id/ibtMenu"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                app:srcCompat="@drawable/ic_menu_black_24dp"
-                tools:ignore="VectorDrawableCompat" />
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/ibtMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    app:srcCompat="@drawable/ic_menu_black_24dp"
+                    tools:ignore="VectorDrawableCompat" />
+            </LinearLayout>
         </FrameLayout>
 
 
@@ -130,7 +135,7 @@
             android:id="@+id/mImageLover1"
             android:layout_width="117dp"
             android:layout_height="111dp"
-            android:src="@drawable/logo"
+            android:src="@drawable/change_image"
             app:civ_border_color="@color/Pi50"
             app:civ_border_width="2dp"
             tools:ignore="MissingConstraints" />
@@ -221,7 +226,7 @@
             android:id="@+id/mImageLover2"
             android:layout_width="117dp"
             android:layout_height="111dp"
-            android:src="@drawable/lover2"
+            android:src="@drawable/change_image"
             app:civ_border_color="@color/Pi50"
             app:civ_border_width="2dp"
             app:layout_constraintBottom_toBottomOf="parent"

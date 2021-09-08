@@ -43,6 +43,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 import es.dmoral.toasty.Toasty;
+import nl.dionsegijn.konfetti.models.Shape;
+import nl.dionsegijn.konfetti.models.Size;
+
+import static com.bacnk.lovedays.main.MainInfoActivity.konfettiView;
 
 public class FragmentMain extends BaseFragment implements DatabaseInfoAppListener {
     public static String PATERN_SPLIT_MESS = "\n";
@@ -134,7 +138,7 @@ public class FragmentMain extends BaseFragment implements DatabaseInfoAppListene
         mLabel1.setText(saveSharedPreferences.getTitleDisplay().getTitleTop());
         mLabel2.setText(saveSharedPreferences.getTitleDisplay().getTitleBottom());
 
-        setAnimCar(mImageCar);
+        //setAnimCar(mImageCar);
 
         // On show case count day
         if (!saveSharedPreferences.getShowCaseStartDay()) {
@@ -299,30 +303,6 @@ public class FragmentMain extends BaseFragment implements DatabaseInfoAppListene
         FragmentCount.newInstance(startDay);
     }
 
-    private void setAnimCar(final ImageView view) {
-
-       // float startPx = saveSharedPreferences.getPositionCar();
-
-        Date currentTime = Calendar.getInstance().getTime();
-        long secondNowH = currentTime.getHours() * 60 * 60;
-        long secondNowM = currentTime.getMinutes() * 60;
-        long secondNowS = currentTime.getSeconds();
-
-        long secondRuned = (secondNowH + secondNowM + secondNowS) * 1000;
-
-        long pX = (long) (secondRuned * SPEED);
-        long roandConLai = (long) (MAX_ROAD - pX);
-
-        // Start car
-        view.setX(pX);
-
-        long timeConLai = (long) (roandConLai/SPEED);
-
-        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "translationX", roandConLai);
-        animation.setDuration(timeConLai);
-        animation.start();
-
-    }
     /**
      *
      * @param startDay
@@ -398,6 +378,17 @@ public class FragmentMain extends BaseFragment implements DatabaseInfoAppListene
     public void updPersonSuccess(String startDay) {
         if (startDay != null) {
             setCountDays(startDay);
+
+            konfettiView.build()
+                    .addColors(this.getResources().getColor(R.color.PB1), this.getResources().getColor(R.color.PB2), this.getResources().getColor(R.color.PB3))
+                    .setDirection(0.0, 359.0)
+                    .setSpeed(1f, 5f)
+                    .setFadeOutEnabled(true)
+                    .setTimeToLive(2000L)
+                    .addShapes(Shape.Square.INSTANCE, Shape.Circle.INSTANCE)
+                    .addSizes(new Size(12, 5f))
+                    .setPosition(-50f, konfettiView.getWidth() + 50f, -50f, -50f)
+                    .streamFor(300, 5000L);
         }
 
         waitProgress(dialogUpdateLocer, false);
